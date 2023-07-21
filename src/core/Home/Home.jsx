@@ -3,6 +3,7 @@ import StyledContentWrapper from '../../styles/StyledContentWrapper/StyledConten
 import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
 const StyledHeader = styled.header`
+	display: grid;
 	padding: 6rem 4rem;
 	background-color: var(--color-neutral-0);
 	background-image: linear-gradient(
@@ -11,12 +12,26 @@ const StyledHeader = styled.header`
 		var(--color-neutral-100) 100%
 	);
 	h1 {
-		color: var(--color-primary-900);
-		/* letter-spacing: 1px; */
-		/* line-height: 1.5; */
-		/* font-size: 5rem; */
-		text-transform: capitalize;
 		margin-bottom: 2rem;
+		line-height: 1.3;
+		text-transform: capitalize;
+		color: var(--color-primary-900);
+	}
+	p {
+		color: var(--color-neutral-500);
+		margin-bottom: 3rem;
+	}
+	@media (min-width: 576px) {
+		padding: 8rem 4rem;
+		${StyledContentWrapper} {
+			max-width: 600px;
+		}
+		h1 {
+			font-size: 5rem;
+		}
+		p {
+			font-size: 2rem;
+		}
 	}
 `;
 
@@ -26,23 +41,15 @@ const Home = () => {
 			<StyledHeader>
 				<StyledContentWrapper>
 					<h1>
-						{/* Where Technology Meets Your Needs */}
-						The Ultimate Online Store for Tech Lovers
+						{/* Where Technology <br /> Meets Your Needs. */}
+						The Ultimate Store <br /> for Tech Lovers.
 					</h1>
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
 						asperiores error quibusdam.
 					</p>
-					<br />
-					<Button>Default</Button>
-					<Button variant='secondary' size='big'>
-						Secondary Big
-					</Button>
 					<Button as={Link} to='about'>
-						Link
-					</Button>
-					<Button variant='primary' size='small'>
-						Primary Small
+						Learn More
 					</Button>
 				</StyledContentWrapper>
 			</StyledHeader>
