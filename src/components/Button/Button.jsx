@@ -27,6 +27,7 @@ const sizeBigStyles = css`
 `;
 
 const StyledButton = styled.button`
+	display: inline-block;
 	padding: 0.7em 2em;
 	font-weight: 500;
 	border-radius: var(--border-radius-pill);
