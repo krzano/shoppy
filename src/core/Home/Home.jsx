@@ -24,27 +24,28 @@ const Home = () => {
 	return (
 		<>
 			<StyledHeader>
-				<h1>
-					{/* Where Technology Meets Your Needs */}
-					The Ultimate Online Store for Tech Lovers
-				</h1>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-					asperiores error quibusdam.
-				</p>
-				<br />
-				<Button>Default</Button>
-				<Button variant='secondary' size='big'>
-					Secondary Big
-				</Button>
-				<Button as={Link} to='about'>
-					Link
-				</Button>
-				<Button variant='primary' size='small'>
-					Primary Small
-				</Button>
+				<StyledContentWrapper>
+					<h1>
+						{/* Where Technology Meets Your Needs */}
+						The Ultimate Online Store for Tech Lovers
+					</h1>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+						asperiores error quibusdam.
+					</p>
+					<br />
+					<Button>Default</Button>
+					<Button variant='secondary' size='big'>
+						Secondary Big
+					</Button>
+					<Button as={Link} to='about'>
+						Link
+					</Button>
+					<Button variant='primary' size='small'>
+						Primary Small
+					</Button>
+				</StyledContentWrapper>
 			</StyledHeader>
-			<StyledContentWrapper></StyledContentWrapper>
 		</>
 	);
 };
