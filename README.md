@@ -1,84 +1,23 @@
-# Features:
+# Shoppy - a digital store for buying and browsing tech products.
 
-Logo font: Fugaz One
+Shoppy is an e-commerce web application developped in React.
 
-## Pages:
+**Deploy status:** &nbsp;&nbsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/e9e77f6a-acbc-4997-98db-b019a6880d69/deploy-status)](https://app.netlify.com/sites/krzano-shoppy/deploys)
+**Live preview: &nbsp; [https://krzano-shoppy.netlify.app/](https://krzano-shoppy.netlify.app/)**
+<br/>
 
-- _/_
-- _/about_
-- _/cart_
-- _/checkout_
-- _/account_
-- _/products_
-- _/products/:productId_
+## Installation and Setup Instructions
 
-### Authentication:
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
-- login
-- register
-- account settings including contact data and address
+Installation:
 
-### Shared layout:
+`npm install`
 
-- Navbar/Sidebar with user icon, cart icon, nav links
-  - User
-  - Cart
-  - Navlinks
-- Outlet with current page
+To Start Dev Server:
 
-### Cart:
+`npm run dev`
 
-- adding removing items
-- calculating totals
-- proceed to checkout button
-- promo code input
+To Visit App:
 
-### Checkout:
-
-- if user added address to his account it's updated right away
-- else user can fill the address/contact form
-
-### All products page:
-
-- fetch products from API
-- display products in grid/list view
-
-### Filter products toolbar:
-
-- sort by: price/name functionality
-- filter by: name, category, company, rating
-- clear filters
-
-### Single product page:
-
-- fetch and display product
-- details, photo gallery
-- add to cart button
-
-### Home page:
-
-- hero img section
-- categories
-- top/featured products
-- footer
-
-### About us page:
-
-- our story section
-- faq section
-
-=====================================
-Click outside detection:
-``js	useEffect(() => {
-		let handler = (event) => {
-			console.log(event.target);
-			if (!accountBtnRef.current.contains(event.target)) {
-				closeDropdown();
-			}
-		};
-		document.addEventListener('mousedown', handler);
-
-		return () => {
-			document.removeEventListener('mousedown', handler);
-		};
-	}, []);
+`http://localhost:5173/`
