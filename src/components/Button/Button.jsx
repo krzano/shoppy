@@ -30,15 +30,19 @@ const StyledButton = styled.button`
 	display: inline-block;
 	padding: 0.7em 2em;
 	font-weight: 500;
+	color: var(--color-neutral-0);
+	background-color: var(--color-primary-900);
 	border-radius: var(--border-radius-pill);
 	border: 1px solid var(--color-primary-900);
 	cursor: pointer;
 	text-decoration: none;
-	${({ variant }) => variant === 'primary' && variantPrimaryStyles}
-	${({ variant }) => variant === 'secondary' && variantSecondaryStyles}
-	${({ size }) => size === 'small' && sizeSmallStyles}
-	${({ size }) => size === 'medium' && sizeMediumStyles}
-	${({ size }) => size === 'big' && sizeBigStyles}
+	${({ variant }) =>
+		(variant === 'primary' && variantPrimaryStyles) ||
+		(variant === 'secondary' && variantSecondaryStyles)}
+	${({ size }) =>
+		(size === 'small' && sizeSmallStyles) ||
+		(size === 'medium' && sizeMediumStyles) ||
+		(size === 'big' && sizeBigStyles)}
 `;
 
 const Button = ({ as, to, variant = 'primary', size = 'medium', children }) => {
