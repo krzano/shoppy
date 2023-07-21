@@ -2,6 +2,41 @@ import { styled } from 'styled-components';
 import StyledContentWrapper from '../../styles/StyledContentWrapper/StyledContentWrapper';
 import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
+import Section from './Section/Section';
+import CardsContainer from './CardsContainer/CardsContainer';
+import CardLink from './CardLink/CardLink';
+import categoryLaptopsImg from '../../assets/images/category-laptops.jpg';
+import categoryMobilePhonesImg from '../../assets/images/category-mobile-phones.jpg';
+import categoryTabletsImg from '../../assets/images/category-tablets.jpg';
+import categoryAccesoriesImg from '../../assets/images/category-accesories.jpg';
+
+const featuredCategories = [
+	{
+		id: 0,
+		text: 'laptops',
+		path: 'products',
+		$backgroundImg: categoryLaptopsImg,
+	},
+	{
+		id: 1,
+		text: 'mobile phones',
+		path: 'products',
+		$backgroundImg: categoryMobilePhonesImg,
+	},
+	{
+		id: 2,
+		text: 'tablets',
+		path: 'products',
+		$backgroundImg: categoryTabletsImg,
+	},
+	{
+		id: 3,
+		text: 'accesories',
+		path: 'products',
+		$backgroundImg: categoryAccesoriesImg,
+	},
+];
+
 const StyledHeader = styled.header`
 	display: grid;
 	padding: 6rem 4rem;
@@ -41,7 +76,6 @@ const Home = () => {
 			<StyledHeader>
 				<StyledContentWrapper>
 					<h1>
-						{/* Where Technology <br /> Meets Your Needs. */}
 						The Ultimate Store <br /> for Tech Lovers.
 					</h1>
 					<p>
@@ -53,6 +87,20 @@ const Home = () => {
 					</Button>
 				</StyledContentWrapper>
 			</StyledHeader>
+			<Section title='Browse our top categories'>
+				<CardsContainer>
+					{featuredCategories.map(({ id, text, path, $backgroundImg }) => {
+						return (
+							<CardLink
+								key={id}
+								to={path}
+								text={text}
+								$backgroundImg={$backgroundImg}
+							/>
+						);
+					})}
+				</CardsContainer>
+			</Section>
 		</>
 	);
 };

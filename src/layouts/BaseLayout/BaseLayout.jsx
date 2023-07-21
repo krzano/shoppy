@@ -2,7 +2,8 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import { styled } from 'styled-components';
-// import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
+
 const StyledMain = styled.main`
 	display: block;
 	/* margin-top: var(--height-navbar); */
@@ -30,7 +31,7 @@ const BaseLayout = ({
 				footerLinksList={footerLinksList}
 				socialLinksList={socialLinksList}
 			/>
-			{/* <ScrollToTop /> */}
+			<ScrollToTop />
 		</>
 	);
 };
