@@ -28,7 +28,7 @@ const StyledButton = styled.button`
 		}
 	}}
 	${({ variant }) => {
-		if (variant == 'primary') {
+		if (variant === 'primary') {
 			return css`
 				color: var(--color-neutral-0);
 				background-color: var(--color-primary-900);
@@ -38,13 +38,25 @@ const StyledButton = styled.button`
 				}
 			`;
 		}
-		if (variant == 'secondary') {
+		if (variant === 'secondary') {
 			return css`
-				color: var(--color-neutral-0);
-				background-color: var(--color-primary-900);
+				color: var(--color-primary-900);
+				background-color: var(--color-neutral-0);
 				transition: background-color 0.3s;
 				&:hover {
-					background-color: var(--color-primary-700);
+					background-color: var(--color-primary-100);
+				}
+			`;
+		}
+		if (variant === 'text') {
+			return css`
+				border: none;
+				background: none;
+				padding: 0 0.7rem;
+				color: var(--color-primary-700);
+				&:hover {
+					color: var(--color-primary-500);
+					text-decoration: underline;
 				}
 			`;
 		}
