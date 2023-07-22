@@ -1,3 +1,6 @@
+# TEMP
+ignored-folder
+
 # Logs
 logs
 *.log
@@ -12,8 +15,8 @@ dist
 dist-ssr
 *.local
 
-# TEMP
-DESIGN_INSPIRATION
+# env variables
+.env
 
 # Editor directories and files
 .vscode/*
