@@ -5,7 +5,7 @@ import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledCon
 const StyledLogin = styled.div`
 	background-color: var(--color-neutral-50);
 	${StyledContentWrapper} {
-		max-width: 600px;
+		max-width: 50rem;
 	}
 `;
 

@@ -62,13 +62,22 @@ const FormikLoginForm = () => {
 			}}>
 			<StyledFormikLoginForm>
 				<h1>{hasAccount ? 'login' : 'register'}</h1>
-				<FormikFormRow name='email' type='email' />
-				<FormikFormRow name='password' type='password' />
+				<FormikFormRow
+					name='email'
+					type='email'
+					placeholder='e.g. user@email.com'
+				/>
+				<FormikFormRow
+					name='password'
+					type='password'
+					placeholder='at least 6 characters'
+				/>
 				{!hasAccount && (
 					<FormikFormRow
 						name='confirmPassword'
 						labelText='confirm password'
 						type='password'
+						placeholder='confirm your password'
 					/>
 				)}
 				<Button type='submit'>{hasAccount ? 'Login' : 'Register'}</Button>

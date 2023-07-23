@@ -5,7 +5,7 @@ const StyledFormikFormRow = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
 	label {
-		margin-bottom: 1rem;
+		margin-bottom: 0.7rem;
 		text-transform: capitalize;
 		color: var(--color-neutral-700);
 	}
@@ -18,11 +18,14 @@ const StyledFormikFormRow = styled.div`
 			outline-color: var(--color-primary-700);
 			border-color: var(--color-primary-700);
 		}
+		&::placeholder {
+			font-size: 0.8em;
+		}
 	}
 	.error-text {
 		margin-top: 0.5rem;
-		min-height: 1em;
 		font-size: 1.4rem;
+		line-height: 1;
 	}
 	&.error {
 		input {
