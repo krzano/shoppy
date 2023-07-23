@@ -14,7 +14,6 @@ const StyledFormikLoginForm = styled(Form)`
 	gap: 2rem;
 	padding: 4rem 3rem 6rem;
 	min-height: calc(100vh - var(--height-navbar));
-	font-size: 1.8rem;
 	background-color: transparent;
 	h1 {
 		margin-bottom: 0.5em;
@@ -37,6 +36,7 @@ const StyledFormikLoginForm = styled(Form)`
 	}
 	@media (min-width: 576px) {
 		padding: 6rem 4rem 8rem;
+		font-size: 1.8rem;
 	}
 	@media (min-width: 768px) {
 		padding: 6rem 6rem 10rem;

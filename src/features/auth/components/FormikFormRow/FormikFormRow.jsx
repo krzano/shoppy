@@ -6,14 +6,13 @@ const StyledFormikFormRow = styled.div`
 	grid-template-columns: 1fr;
 	label {
 		margin-bottom: 1rem;
-		font-weight: 500;
 		text-transform: capitalize;
-		color: var(--color-neutral-600);
+		color: var(--color-neutral-700);
 	}
 	input {
 		padding: 0.5rem 1.5rem;
 		width: 100%;
-		border: 2px solid var(--color-neutral-400);
+		border: 1px solid var(--color-neutral-400);
 		border-radius: var(--border-radius-sm);
 		&:focus {
 			outline-color: var(--color-primary-700);
