@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import BaseLayout from '../layouts/BaseLayout/BaseLayout';
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
 import {
@@ -5,6 +6,8 @@ import {
 	IoLogOutOutline,
 	IoLogInOutline,
 } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { getUserSession } from '../features/auth/authSlice';
 
 const navLinksList = [
 	{
@@ -36,13 +39,13 @@ const dropdownItemsList = [
 		icon: <IoLogInOutline />,
 		visible: true,
 		component: 'link',
-		path: '/',
+		path: 'login',
 	},
 	{
 		id: 1,
 		label: 'Settings',
 		icon: <IoSettingsOutline />,
-		visible: false,
+		visible: true,
 		component: 'link',
 		path: '/',
 	},
@@ -50,7 +53,7 @@ const dropdownItemsList = [
 		id: 2,
 		label: 'Logout',
 		icon: <IoLogOutOutline />,
-		visible: false,
+		visible: true,
 		component: 'button',
 		onClick: () => {
 			console.log('logout');
@@ -166,6 +169,10 @@ const footerLinksList = [
 ];
 
 const BaseLayoutWrapper = ({ children }) => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getUserSession());
+	}, []);
 	return (
 		<BaseLayout
 			navLinksList={navLinksList}

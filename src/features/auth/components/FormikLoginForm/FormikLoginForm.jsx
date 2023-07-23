@@ -1,20 +1,46 @@
 import { Form, Formik, useFormik } from 'formik';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
 import FormikFormRow from '../FormikFormRow/FormikFormRow';
+import { FcGoogle } from 'react-icons/fc';
 
 const StyledFormikLoginForm = styled(Form)`
-	background-color: var(--color-neutral-50);
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
 	gap: 2rem;
-	min-width: 50%;
-	padding: 2rem 1rem;
-	border-radius: var(--border-radius-lg);
-	border: 1px solid var(--color-neutral-500);
+	padding: 4rem 3rem 6rem;
+	min-height: calc(100vh - var(--height-navbar));
+	font-size: 1.8rem;
+	background-color: transparent;
+	h1 {
+		margin-bottom: 0.5em;
+		text-transform: capitalize;
+		text-align: center;
+		color: var(--color-primary-900);
+	}
+
+	.auth-provider-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1em;
+		svg {
+			font-size: 1.5em;
+		}
+	}
+	.form-footer {
+		text-align: center;
+	}
+	@media (min-width: 576px) {
+		padding: 6rem 4rem 8rem;
+	}
+	@media (min-width: 768px) {
+		padding: 6rem 6rem 10rem;
+	}
 `;
 
 const FormikLoginForm = () => {
@@ -35,7 +61,7 @@ const FormikLoginForm = () => {
 				actions.resetForm();
 			}}>
 			<StyledFormikLoginForm>
-				<h2>{hasAccount ? 'login' : 'register'} page</h2>
+				<h1>{hasAccount ? 'login' : 'register'}</h1>
 				<FormikFormRow name='email' type='email' />
 				<FormikFormRow name='password' type='password' />
 				{!hasAccount && (
@@ -46,8 +72,13 @@ const FormikLoginForm = () => {
 					/>
 				)}
 				<Button type='submit'>{hasAccount ? 'Login' : 'Register'}</Button>
+				<hr />
+				<Button type='button' variant='secondary' className='auth-provider-btn'>
+					<FcGoogle />
+					<span>Continue with Google</span>
+				</Button>
 				<div>
-					<p>
+					<p className='form-footer'>
 						{hasAccount ? 'Not a member yet?' : 'Already a member?'}
 						<Button
 							type='button'

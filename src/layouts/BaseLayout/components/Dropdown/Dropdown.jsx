@@ -39,7 +39,7 @@ const dropdownListItemStyles = css`
 	justify-content: center;
 	justify-content: flex-start;
 	width: 100%;
-	padding: 0.5rem;
+	padding: 1rem;
 	gap: 0.5rem;
 	color: var(--color-neutral-600);
 	background-color: transparent;

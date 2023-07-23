@@ -50,6 +50,7 @@ const StyledButton = styled.button`
 		}
 		if (variant === 'text') {
 			return css`
+				font-size: 1em;
 				border: none;
 				background: none;
 				padding: 0 0.7rem;

@@ -7,9 +7,9 @@ import Home from './core/Home/Home';
 import About from './core/About/About';
 import Cart from './features/cart/views/Cart';
 import Checkout from './features/cart/views/Checkout';
-import Account from './features/authentication/views/Account';
 import Products from './features/products/views/Products';
 import SingleProduct from './features/products/views/SingleProduct';
+import Login from './features/auth/views/Login';
 
 const router = createBrowserRouter([
 	{
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
 				element: <Checkout />,
 			},
 			{
-				path: 'account',
-				element: <Account />,
+				path: 'login',
+				element: <Login />,
 			},
 			{
 				path: 'products',
