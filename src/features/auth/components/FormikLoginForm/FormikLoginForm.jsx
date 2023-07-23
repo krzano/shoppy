@@ -5,6 +5,7 @@ import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
 import FormikFormRow from '../FormikFormRow/FormikFormRow';
 import { FcGoogle } from 'react-icons/fc';
+import Divider from '../../../../components/Divider/Divider';
 
 const StyledFormikLoginForm = styled(Form)`
 	display: flex;
@@ -81,7 +82,7 @@ const FormikLoginForm = () => {
 					/>
 				)}
 				<Button type='submit'>{hasAccount ? 'Login' : 'Register'}</Button>
-				<hr />
+				<Divider>or</Divider>
 				<Button type='button' variant='secondary' className='auth-provider-btn'>
 					<FcGoogle />
 					<span>Continue with Google</span>
