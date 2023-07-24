@@ -178,8 +178,7 @@ const BaseLayoutWrapper = ({ children }) => {
 				console.log('logout');
 				signOut(auth)
 					.then(() => {
-						console.log('signed out');
-						toast.success('Succesfully signed out.');
+						toast.success('Successfully logged out.');
 					})
 					.catch((error) => console.log(error));
 			},

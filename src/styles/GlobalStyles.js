@@ -57,11 +57,16 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-sm: 0.5rem;
   --border-radius-md: 0.7rem;
   --border-radius-lg: 1rem;
-
+  
   --transition: color 0.3s, background-color 0.3s;
-
+  
   --height-navbar:8rem;
+  /* toastify styles */
+  --toastify-color-progress-success: var(--color-primary-500);
+  --toastify-color-progress-error: var(--color-red-700);
+  /* end of toastify styles */
 }
+
 
 *,
 *::after,

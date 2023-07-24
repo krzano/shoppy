@@ -22,7 +22,7 @@ const FormikLoginForm = () => {
 		setIsLoading(true);
 		if (hasAccount) {
 			signInWithEmailAndPassword(auth, email, password)
-				.then(() => toast.success('Login successful.'))
+				.then(() => toast.success('Succesfully logged in.'))
 				.catch((error) => {
 					const errorCode = error.code;
 					const errorMessage = error.message;

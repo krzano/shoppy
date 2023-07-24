@@ -65,9 +65,12 @@ function App() {
 					top: '9rem',
 					left: '50%',
 					translate: '-50%',
+					maxWidth: '80vw',
 					fontFamily: 'Poppins, sans-serif',
 					textAlign: 'center',
-					maxWidth: '80vw',
+					borderRadius: 'var(--border-radius-pill)',
+					border: '1px solid var(--color-neutral-300)',
+					backgroundColor: 'var(--color-neutral-50)',
 				}}
 				icon={false}
 				closeButton={false}
