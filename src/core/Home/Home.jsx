@@ -39,7 +39,7 @@ const featuredCategories = [
 
 const StyledHeader = styled.header`
 	display: grid;
-	padding: 6rem 4rem;
+	padding: 8rem 4rem;
 	background-color: var(--color-neutral-0);
 	background-image: linear-gradient(
 		180deg,
@@ -57,7 +57,7 @@ const StyledHeader = styled.header`
 		margin-bottom: 3rem;
 	}
 	@media (min-width: 576px) {
-		padding: 8rem 4rem;
+		padding: 10rem 4rem;
 		${StyledContentWrapper} {
 			max-width: 600px;
 		}
