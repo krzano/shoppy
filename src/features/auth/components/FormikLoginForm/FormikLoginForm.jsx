@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
-import FormikFormRow from '../../../../components/FormikTextField/FormikTextField';
+import FormikTextField from '../../../../components/FormikTextField/FormikTextField';
 import { FcGoogle } from 'react-icons/fc';
 import Divider from '../../../../components/Divider/Divider';
 import {
@@ -57,18 +57,18 @@ const FormikLoginForm = () => {
 			onSubmit={handleSubmit}>
 			<StyledFormikLoginForm>
 				<h1>{hasAccount ? 'login' : 'register'}</h1>
-				<FormikFormRow
+				<FormikTextField
 					name='email'
 					type='email'
 					placeholder='e.g. user@email.com'
 				/>
-				<FormikFormRow
+				<FormikTextField
 					name='password'
 					type='password'
 					placeholder='at least 6 characters'
 				/>
 				{!hasAccount && (
-					<FormikFormRow
+					<FormikTextField
 						name='confirmPassword'
 						labelText='confirm password'
 						type='password'
@@ -76,7 +76,7 @@ const FormikLoginForm = () => {
 					/>
 				)}
 				<Button disabled={isLoading} type='submit'>
-					{hasAccount ? 'Login' : 'Register'}
+					{(isLoading && 'Loading...') || (hasAccount ? 'Login' : 'Register')}
 				</Button>
 				<Divider>or</Divider>
 				<Button
