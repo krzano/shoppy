@@ -1,87 +1,19 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import supabase from '../../services/supabase/supabase';
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
 	isLoading: false,
-	user: null,
-	isLoggedIn: false,
+	currentUser: null,
 };
-
-export const getUserSession = createAsyncThunk(
-	'/auth/getUserSession',
-	async (_, thunkAPI) => {
-		const { data, error } = await supabase.auth.getSession();
-		console.log(data, error);
-		if (error) {
-			console.error(error.message);
-			return thunkAPI.rejectWithValue(error.message);
-		}
-	}
-);
-
-export const loginUser = createAsyncThunk(
-	'/auth/loginUser',
-	async ({ email, password }, thunkAPI) => {
-		const { data, error } = await supabase.auth.signInWithPassword({
-			email: email,
-			password: password,
-		});
-		if (error) {
-			console.error(error.message);
-			return thunkAPI.rejectWithValue(error.message);
-		}
-		return data;
-	}
-);
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	extraReducers: (builder) => {
-		builder
-			.addCase(getUserSession.pending, (state) => {
-				state.isLoading = true;
-			})
-			.addCase(getUserSession.fulfilled, (state) => {
-				state.isLoading = false;
-			})
-			.addCase(getUserSession.rejected, (state) => {
-				state.isLoading = false;
-			})
-			.addCase(loginUser.pending, (state) => {
-				state.isLoading = true;
-			})
-			.addCase(loginUser.fulfilled, (state, { payload }) => {
-				state.isLoading = false;
-				state.user = payload.user;
-				alert('You are logged in!');
-			})
-			.addCase(loginUser.rejected, (state) => {
-				state.isLoading = false;
-				alert('There was an error...');
-			});
+	reducers: {
+		updateUser: (state, { payload }) => {
+			state.currentUser = payload;
+		},
 	},
 });
 
 export default authSlice.reducer;
-
-// const loginUser = async ({ email, password }) => {
-// 	const { data, error } = await supabase.auth.signInWithPassword({
-// 		email: email,
-// 		password: password,
-// 	});
-// 	console.log('error', error);
-// 	console.log('data', data);
-// };
-// const registerUser = async ({ email, password }) => {
-// 	const { data, error } = await supabase.auth.signUp({
-// 		email: email,
-// 		password: password,
-// 	});
-// 	console.log('error', error);
-// 	console.log('data', data);
-// };
-
-// const logoutUser = async () => {
-// 	const logout = await supabase.auth.signOut();
-// 	console.log(logout);
-// };
+export const { updateUser } = authSlice.actions;

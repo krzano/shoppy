@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import BaseLayout from '../layouts/BaseLayout/BaseLayout';
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
 import {
@@ -6,8 +5,17 @@ import {
 	IoLogOutOutline,
 	IoLogInOutline,
 } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
-import { getUserSession } from '../features/auth/authSlice';
+import { signOut } from 'firebase/auth';
+import { auth } from '../services/firebase/firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	removeUserFromLocalStorage,
+	updateUserInLocalStorage,
+} from '../utils/localStorage';
+import { updateUser } from '../features/auth/authSlice';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const navLinksList = [
 	{
@@ -29,35 +37,6 @@ const navLinksList = [
 		id: 3,
 		path: 'cart',
 		label: 'Cart',
-	},
-];
-
-const dropdownItemsList = [
-	{
-		id: 0,
-		label: 'Login',
-		icon: <IoLogInOutline />,
-		visible: true,
-		component: 'link',
-		path: 'login',
-	},
-	{
-		id: 1,
-		label: 'Settings',
-		icon: <IoSettingsOutline />,
-		visible: true,
-		component: 'link',
-		path: '/',
-	},
-	{
-		id: 2,
-		label: 'Logout',
-		icon: <IoLogOutOutline />,
-		visible: true,
-		component: 'button',
-		onClick: () => {
-			console.log('logout');
-		},
 	},
 ];
 
@@ -170,9 +149,63 @@ const footerLinksList = [
 
 const BaseLayoutWrapper = ({ children }) => {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector((store) => store.auth);
+
+	const dropdownItemsList = [
+		{
+			id: 0,
+			label: 'Login',
+			icon: <IoLogInOutline />,
+			visible: currentUser ? false : true,
+			component: 'link',
+			path: 'login',
+		},
+		{
+			id: 1,
+			label: 'Settings',
+			icon: <IoSettingsOutline />,
+			visible: currentUser ? true : false,
+			component: 'link',
+			path: '/',
+		},
+		{
+			id: 2,
+			label: 'Logout',
+			icon: <IoLogOutOutline />,
+			visible: currentUser ? true : false,
+			component: 'button',
+			onClick: () => {
+				console.log('logout');
+				signOut(auth)
+					.then(() => {
+						console.log('signed out');
+						toast.success('Succesfully signed out.');
+					})
+					.catch((error) => console.log(error));
+			},
+		},
+	];
+
 	useEffect(() => {
-		dispatch(getUserSession());
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				const newUser = {
+					uid: currentUser.uid,
+					email: currentUser.email,
+					emailVerified: currentUser.emailVerified,
+				};
+				dispatch(updateUser(newUser));
+				updateUserInLocalStorage(newUser);
+			} else {
+				dispatch(updateUser(null));
+				removeUserFromLocalStorage();
+			}
+		});
+		return () => {
+			unsubscribe();
+		};
 	}, []);
+
 	return (
 		<BaseLayout
 			navLinksList={navLinksList}

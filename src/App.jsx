@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
 import BaseLayoutWrapper from './wrappers/BaseLayoutWrapper';
-
 import PageNotFound from './core/PageNotFound';
 import Home from './core/Home/Home';
 import About from './core/About/About';
@@ -10,6 +9,10 @@ import Checkout from './features/cart/views/Checkout';
 import Products from './features/products/views/Products';
 import SingleProduct from './features/products/views/SingleProduct';
 import Login from './features/auth/views/Login';
+import ProtectedLoginFormRoute from './routes/ProtectedLoginFormRoute';
+import { ToastContainer } from 'react-toastify';
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
 	{
@@ -35,7 +38,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'login',
-				element: <Login />,
+				element: (
+					<ProtectedLoginFormRoute>
+						<Login />
+					</ProtectedLoginFormRoute>
+				),
 			},
 			{
 				path: 'products',
@@ -53,6 +60,21 @@ function App() {
 	return (
 		<>
 			<GlobalStyles />
+			<ToastContainer
+				toastStyle={{
+					top: '9rem',
+					left: '50%',
+					translate: '-50%',
+					fontFamily: 'Poppins, sans-serif',
+					textAlign: 'center',
+					maxWidth: '80vw',
+				}}
+				icon={false}
+				closeButton={false}
+				position='top-center'
+				autoClose={2000}
+				transition={Flip}
+			/>
 			<RouterProvider router={router} />
 		</>
 	);

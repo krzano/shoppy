@@ -3,9 +3,105 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
-import FormikFormRow from '../FormikFormRow/FormikFormRow';
+import FormikFormRow from '../../../../components/FormikTextField/FormikTextField';
 import { FcGoogle } from 'react-icons/fc';
 import Divider from '../../../../components/Divider/Divider';
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from '../../../../services/firebase/firebase';
+import { toast } from 'react-toastify';
+
+const FormikLoginForm = () => {
+	const [hasAccount, setHasAccount] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleSubmit = ({ email, password }, actions) => {
+		console.log('submit', email, password);
+		setIsLoading(true);
+		if (hasAccount) {
+			signInWithEmailAndPassword(auth, email, password)
+				.then(() => toast.success('Login successful.'))
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log('Error:', errorCode, errorMessage);
+					toast.error('There was an error...');
+				})
+				.finally(() => setIsLoading(false));
+		} else {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then(() => toast.success('Account created.'))
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log('Error:', errorCode, errorMessage);
+					toast.error('There was an error...');
+				})
+				.finally(() => setIsLoading(false));
+		}
+		actions.resetForm();
+	};
+
+	return (
+		<Formik
+			initialValues={{
+				email: '',
+				password: '',
+				confirmPassword: '',
+			}}
+			validationSchema={
+				hasAccount ? authSchema.omit(['confirmPassword']) : authSchema
+			}
+			onSubmit={handleSubmit}>
+			<StyledFormikLoginForm>
+				<h1>{hasAccount ? 'login' : 'register'}</h1>
+				<FormikFormRow
+					name='email'
+					type='email'
+					placeholder='e.g. user@email.com'
+				/>
+				<FormikFormRow
+					name='password'
+					type='password'
+					placeholder='at least 6 characters'
+				/>
+				{!hasAccount && (
+					<FormikFormRow
+						name='confirmPassword'
+						labelText='confirm password'
+						type='password'
+						placeholder='confirm your password'
+					/>
+				)}
+				<Button disabled={isLoading} type='submit'>
+					{hasAccount ? 'Login' : 'Register'}
+				</Button>
+				<Divider>or</Divider>
+				<Button
+					disabled={isLoading}
+					type='button'
+					variant='secondary'
+					className='auth-provider-btn'>
+					<FcGoogle />
+					<span>Continue with Google</span>
+				</Button>
+				<div>
+					<p className='form-footer'>
+						{hasAccount ? 'Not a member yet?' : 'Already a member?'}
+						<Button
+							type='button'
+							variant='text'
+							onClick={() => setHasAccount((prev) => !prev)}>
+							{hasAccount ? 'Signup here' : 'Login here'}
+						</Button>
+					</p>
+				</div>
+			</StyledFormikLoginForm>
+		</Formik>
+	);
+};
 
 const StyledFormikLoginForm = styled(Form)`
 	display: flex;
@@ -36,70 +132,9 @@ const StyledFormikLoginForm = styled(Form)`
 		text-align: center;
 	}
 	@media (min-width: 576px) {
-		padding: 6rem 4rem 8rem;
-		font-size: 1.8rem;
-	}
-	@media (min-width: 768px) {
 		padding: 6rem 6rem 10rem;
+		font-size: 1.8rem;
 	}
 `;
 
-const FormikLoginForm = () => {
-	const [hasAccount, setHasAccount] = useState(true);
-
-	return (
-		<Formik
-			initialValues={{
-				email: '',
-				password: '',
-				confirmPassword: '',
-			}}
-			validationSchema={
-				hasAccount ? authSchema.omit(['confirmPassword']) : authSchema
-			}
-			onSubmit={(values, actions) => {
-				console.log('submit', values);
-				actions.resetForm();
-			}}>
-			<StyledFormikLoginForm>
-				<h1>{hasAccount ? 'login' : 'register'}</h1>
-				<FormikFormRow
-					name='email'
-					type='email'
-					placeholder='e.g. user@email.com'
-				/>
-				<FormikFormRow
-					name='password'
-					type='password'
-					placeholder='at least 6 characters'
-				/>
-				{!hasAccount && (
-					<FormikFormRow
-						name='confirmPassword'
-						labelText='confirm password'
-						type='password'
-						placeholder='confirm your password'
-					/>
-				)}
-				<Button type='submit'>{hasAccount ? 'Login' : 'Register'}</Button>
-				<Divider>or</Divider>
-				<Button type='button' variant='secondary' className='auth-provider-btn'>
-					<FcGoogle />
-					<span>Continue with Google</span>
-				</Button>
-				<div>
-					<p className='form-footer'>
-						{hasAccount ? 'Not a member yet?' : 'Already a member?'}
-						<Button
-							type='button'
-							variant='text'
-							onClick={() => setHasAccount((prev) => !prev)}>
-							{hasAccount ? 'Signup here' : 'Login here'}
-						</Button>
-					</p>
-				</div>
-			</StyledFormikLoginForm>
-		</Formik>
-	);
-};
 export default FormikLoginForm;
