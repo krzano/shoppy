@@ -5,75 +5,41 @@ import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
 import FormikTextField from '../../../../components/FormikTextField/FormikTextField';
 import { FcGoogle } from 'react-icons/fc';
-import { BsGithub } from 'react-icons/bs';
 import Divider from '../../../../components/Divider/Divider';
-import supabase from '../../../../services/supabase/supabase';
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from '../../../../services/firebase/firebase';
 import { toast } from 'react-toastify';
 
 const FormikLoginForm = () => {
 	const [hasAccount, setHasAccount] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const signInWithGoogle = async () => {
-		setIsLoading(true);
-		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: 'google',
-		});
-		if (error) {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
-
-	const signInWithGithub = async () => {
-		setIsLoading(true);
-		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: 'github',
-			// options: {
-			// 	redirectTo: 'https://localhost:5173/',
-			// },
-		});
-		if (error) {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
-
-	const loginUser = async ({ email, password }) => {
-		const { data, error } = await supabase.auth.signInWithPassword({
-			email,
-			password,
-		});
-		if (!error) {
-			console.log('Data:', data);
-			toast.success('Successfully logged in');
-		} else {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
-
-	const registerUser = async ({ email, password }) => {
-		const { data, error } = await supabase.auth.signUp({
-			email,
-			password,
-		});
-		if (!error) {
-			console.log('Data:', data);
-			toast.success('Account created');
-		} else {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
-
 	const handleSubmit = ({ email, password }, actions) => {
 		console.log('submit', email, password);
 		setIsLoading(true);
 		if (hasAccount) {
-			loginUser({ email, password });
+			signInWithEmailAndPassword(auth, email, password)
+				.then(() => toast.success('Succesfully logged in.'))
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log('Error:', errorCode, errorMessage);
+					toast.error('There was an error...');
+				})
+				.finally(() => setIsLoading(false));
 		} else {
-			registerUser({ email, password });
+			createUserWithEmailAndPassword(auth, email, password)
+				.then(() => toast.success('Account created.'))
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log('Error:', errorCode, errorMessage);
+					toast.error('There was an error...');
+				})
+				.finally(() => setIsLoading(false));
 		}
 		actions.resetForm();
 	};
@@ -117,19 +83,9 @@ const FormikLoginForm = () => {
 					disabled={isLoading}
 					type='button'
 					variant='secondary'
-					className='auth-provider-btn'
-					onClick={signInWithGoogle}>
+					className='auth-provider-btn'>
 					<FcGoogle />
 					<span>Continue with Google</span>
-				</Button>
-				<Button
-					disabled={isLoading}
-					type='button'
-					variant='secondary'
-					className='auth-provider-btn'
-					onClick={signInWithGithub}>
-					<BsGithub />
-					<span>Continue with Github</span>
 				</Button>
 				<div>
 					<p className='form-footer'>

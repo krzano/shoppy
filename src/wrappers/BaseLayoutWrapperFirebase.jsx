@@ -5,16 +5,17 @@ import {
 	IoLogOutOutline,
 	IoLogInOutline,
 } from 'react-icons/io5';
+import { signOut } from 'firebase/auth';
+import { auth } from '../services/firebase/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	getOAuthSessionFromLocalStorage,
-	removeOAuthSessionFromLocalStorage,
-	updateOAuthSessionInLocalStorage,
+	removeUserFromLocalStorage,
+	updateUserInLocalStorage,
 } from '../utils/localStorage';
+import { updateUser } from '../features/auth/authSlice';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import supabase from '../services/supabase/supabase';
-import { updateSession, updateUser } from '../features/auth/authSlice';
 
 const navLinksList = [
 	{
@@ -148,14 +149,14 @@ const footerLinksList = [
 
 const BaseLayoutWrapper = ({ children }) => {
 	const dispatch = useDispatch();
-	const { currentUser, session } = useSelector((store) => store.auth);
+	const { currentUser } = useSelector((store) => store.auth);
 
 	const dropdownItemsList = [
 		{
 			id: 0,
 			label: 'Login',
 			icon: <IoLogInOutline />,
-			visible: session ? false : true,
+			visible: currentUser ? false : true,
 			component: 'link',
 			path: 'login',
 		},
@@ -163,7 +164,7 @@ const BaseLayoutWrapper = ({ children }) => {
 			id: 1,
 			label: 'Settings',
 			icon: <IoSettingsOutline />,
-			visible: session ? true : false,
+			visible: currentUser ? true : false,
 			component: 'link',
 			path: '/',
 		},
@@ -171,47 +172,39 @@ const BaseLayoutWrapper = ({ children }) => {
 			id: 2,
 			label: 'Logout',
 			icon: <IoLogOutOutline />,
-			visible: session ? true : false,
+			visible: currentUser ? true : false,
 			component: 'button',
 			onClick: () => {
-				supabase.auth.signOut();
-				removeOAuthSessionFromLocalStorage();
-				dispatch(updateSession(null));
-				toast.success('Successfully logged out');
+				console.log('logout');
+				signOut(auth)
+					.then(() => {
+						toast.success('Successfully logged out.');
+					})
+					.catch((error) => console.log(error));
 			},
 		},
 	];
 
 	useEffect(() => {
-		if (window.location.hash) {
-			const allHashParams = new URLSearchParams(
-				window.location.hash.replace('#', '?')
-			);
-			const oAuthSession = Object.fromEntries(allHashParams.entries());
-			dispatch(updateSession(oAuthSession));
-			updateOAuthSessionInLocalStorage(oAuthSession);
-			history.replaceState('', '', location.pathname);
-			toast.success('Signed in with our provider');
-		}
-
-		const oAuthSessionInLocalStorage = getOAuthSessionFromLocalStorage();
-		if (oAuthSessionInLocalStorage) {
-			dispatch(updateSession(oAuthSessionInLocalStorage));
-		}
-
-		const listener = supabase.auth.onAuthStateChange((event, session) => {
-			// if (!session) {
-			// 	dispatch(updateSession(null));
-			// }
-			if (session) {
-				dispatch(updateSession(session));
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				const newUser = {
+					uid: currentUser.uid,
+					email: currentUser.email,
+					emailVerified: currentUser.emailVerified,
+				};
+				dispatch(updateUser(newUser));
+				updateUserInLocalStorage(newUser);
+			} else {
+				dispatch(updateUser(null));
+				removeUserFromLocalStorage();
 			}
 		});
-
 		return () => {
-			listener.data.subscription.unsubscribe();
+			unsubscribe();
 		};
 	}, []);
+
 	return (
 		<BaseLayout
 			navLinksList={navLinksList}

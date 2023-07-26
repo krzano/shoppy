@@ -11,7 +11,7 @@ import SingleProduct from './features/products/views/SingleProduct';
 import Login from './features/auth/views/Login';
 import ProtectedLoginFormRoute from './routes/ProtectedLoginFormRoute';
 import { ToastContainer } from 'react-toastify';
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import { Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
