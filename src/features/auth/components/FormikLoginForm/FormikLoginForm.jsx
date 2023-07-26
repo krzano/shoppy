@@ -113,7 +113,7 @@ const FormikLoginForm = () => {
 					{(isLoading && 'Loading...') || (hasAccount ? 'Login' : 'Register')}
 				</Button>
 				<Divider>or</Divider>
-				<Button
+				{/* <Button
 					disabled={isLoading}
 					type='button'
 					variant='secondary'
@@ -121,7 +121,7 @@ const FormikLoginForm = () => {
 					onClick={signInWithGoogle}>
 					<FcGoogle />
 					<span>Continue with Google</span>
-				</Button>
+				</Button> */}
 				<Button
 					disabled={isLoading}
 					type='button'
