@@ -31,7 +31,7 @@ const featuredCategories = [
 	},
 	{
 		id: 3,
-		text: 'accesories',
+		text: 'accessories',
 		path: 'products',
 		$backgroundImg: categoryAccesoriesImg,
 	},
