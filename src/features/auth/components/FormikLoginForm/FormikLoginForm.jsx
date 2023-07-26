@@ -123,7 +123,7 @@ const FormikLoginForm = () => {
 					<span>Continue with Google</span>
 				</Button> */}
 				<Button
-					disabled={isLoading}
+					disabled={true}
 					type='button'
 					variant='secondary'
 					className='auth-provider-btn'
