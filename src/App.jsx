@@ -7,7 +7,9 @@ import About from './core/About/About';
 import Cart from './features/cart/views/Cart';
 import Checkout from './features/cart/views/Checkout';
 import Products from './features/products/views/Products';
-import SingleProduct from './features/products/views/SingleProduct';
+import SingleProduct, {
+	loader as singleProductLoader,
+} from './features/products/views/SingleProduct';
 import Login from './features/auth/views/Login';
 import ProtectedLoginFormRoute from './routes/ProtectedLoginFormRoute';
 import { ToastContainer } from 'react-toastify';
@@ -51,6 +53,7 @@ const router = createBrowserRouter([
 			{
 				path: 'products/:id',
 				element: <SingleProduct />,
+				loader: singleProductLoader,
 			},
 		],
 	},
