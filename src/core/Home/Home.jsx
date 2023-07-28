@@ -14,25 +14,25 @@ const featuredCategories = [
 	{
 		id: 0,
 		text: 'laptops',
-		path: 'products',
+		path: 'products?category=laptops',
 		$backgroundImg: categoryLaptopsImg,
 	},
 	{
 		id: 1,
 		text: 'mobile phones',
-		path: 'products',
+		path: 'products?category=mobile-phones',
 		$backgroundImg: categoryMobilePhonesImg,
 	},
 	{
 		id: 2,
 		text: 'tablets',
-		path: 'products',
+		path: 'products?category=tablets',
 		$backgroundImg: categoryTabletsImg,
 	},
 	{
 		id: 3,
 		text: 'accessories',
-		path: 'products',
+		path: 'products?category=accessories',
 		$backgroundImg: categoryAccesoriesImg,
 	},
 ];
