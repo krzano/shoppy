@@ -78,7 +78,7 @@ function App() {
 				icon={false}
 				closeButton={false}
 				position='top-center'
-				autoClose={2000}
+				autoClose={1500}
 				transition={Flip}
 			/>
 			<RouterProvider router={router} />
