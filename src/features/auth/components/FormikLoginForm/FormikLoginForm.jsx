@@ -86,7 +86,7 @@ const FormikLoginForm = () => {
 				<Button disabled={isLoading} type='submit'>
 					{(isLoading && 'Loading...') || (hasAccount ? 'Login' : 'Register')}
 				</Button>
-				<Divider>or</Divider>
+				<Divider>or continue with</Divider>
 				<Button
 					disabled={isLoading}
 					type='button'
@@ -99,7 +99,7 @@ const FormikLoginForm = () => {
 						});
 					}}>
 					<RiUserSharedLine />
-					<span>Continue with Demo Account</span>
+					<span>Demo Account</span>
 				</Button>
 				<div>
 					<p className='form-footer'>
