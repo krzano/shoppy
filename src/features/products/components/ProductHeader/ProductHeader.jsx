@@ -7,7 +7,7 @@ const ProductHeader = ({
 	rating,
 	reviews,
 	category,
-	description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus reiciendis dolorum accusantium.',
+	description,
 }) => {
 	return (
 		<StyledProductHeader>
