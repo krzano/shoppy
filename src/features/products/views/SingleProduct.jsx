@@ -1,13 +1,13 @@
 import { useLoaderData } from 'react-router-dom';
-import supabase from '../../../services/supabase/supabase';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import { styled } from 'styled-components';
 import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
 import ProductGallery from '../components/ProductGallery/ProductGallery';
 import ProductInfoContainer from '../components/ProductInfoContainer/ProductInfoContainer';
+import supabase from '../../../services/supabase/supabase';
 
 export const loader = async ({ params: { id } }) => {
-	let { data: products, error } = await supabase
+	const { data: products, error } = await supabase
 		.from('products')
 		.select('*')
 		.eq('sku', id);

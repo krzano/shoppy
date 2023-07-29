@@ -4,40 +4,14 @@ import { styled } from 'styled-components';
 import Button from '../../../../components/Button/Button';
 import authSchema from '../../../../lib/yup/schemas/authSchema';
 import FormikTextField from '../../../../components/FormikTextField/FormikTextField';
-import { FcGoogle } from 'react-icons/fc';
-import { BsGithub } from 'react-icons/bs';
+import { RiUserSharedLine } from 'react-icons/ri';
 import Divider from '../../../../components/Divider/Divider';
-import supabase from '../../../../services/supabase/supabase';
 import { toast } from 'react-toastify';
+import supabase from '../../../../services/supabase/supabase';
 
 const FormikLoginForm = () => {
 	const [hasAccount, setHasAccount] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const signInWithGoogle = async () => {
-		setIsLoading(true);
-		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: 'google',
-		});
-		if (error) {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
-
-	const signInWithGithub = async () => {
-		setIsLoading(true);
-		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: 'github',
-			// options: {
-			// 	redirectTo: 'https://localhost:5173/',
-			// },
-		});
-		if (error) {
-			toast.error(error.message);
-		}
-		setIsLoading(false);
-	};
 
 	const loginUser = async ({ email, password }) => {
 		const { data, error } = await supabase.auth.signInWithPassword({
@@ -113,23 +87,19 @@ const FormikLoginForm = () => {
 					{(isLoading && 'Loading...') || (hasAccount ? 'Login' : 'Register')}
 				</Button>
 				<Divider>or</Divider>
-				{/* <Button
+				<Button
 					disabled={isLoading}
 					type='button'
 					variant='secondary'
 					className='auth-provider-btn'
-					onClick={signInWithGoogle}>
-					<FcGoogle />
-					<span>Continue with Google</span>
-				</Button> */}
-				<Button
-					disabled={true}
-					type='button'
-					variant='secondary'
-					className='auth-provider-btn'
-					onClick={signInWithGithub}>
-					<BsGithub />
-					<span>Continue with Github</span>
+					onClick={() => {
+						loginUser({
+							email: 'testuser@email.com',
+							password: 'testpassword',
+						});
+					}}>
+					<RiUserSharedLine />
+					<span>Continue with Demo Account</span>
 				</Button>
 				<div>
 					<p className='form-footer'>

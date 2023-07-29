@@ -9,7 +9,7 @@ import { styled } from 'styled-components';
 
 const Products = () => {
 	const { isLoading, products } = useSelector((store) => store.products);
-	const dispatch = useDispatch(getAllProducts());
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAllProducts());

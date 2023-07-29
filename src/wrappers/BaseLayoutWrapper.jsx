@@ -6,15 +6,10 @@ import {
 	IoLogInOutline,
 } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	getOAuthSessionFromLocalStorage,
-	removeOAuthSessionFromLocalStorage,
-	updateOAuthSessionInLocalStorage,
-} from '../utils/localStorage';
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { updateSession } from '../features/auth/authSlice';
 import supabase from '../services/supabase/supabase';
-import { updateSession, updateUser } from '../features/auth/authSlice';
+import { useEffect } from 'react';
 
 const navLinksList = [
 	{
@@ -175,7 +170,6 @@ const BaseLayoutWrapper = ({ children }) => {
 			component: 'button',
 			onClick: () => {
 				supabase.auth.signOut();
-				removeOAuthSessionFromLocalStorage();
 				dispatch(updateSession(null));
 				toast.success('Successfully logged out');
 			},
@@ -183,35 +177,19 @@ const BaseLayoutWrapper = ({ children }) => {
 	];
 
 	useEffect(() => {
-		if (window.location.hash) {
-			const allHashParams = new URLSearchParams(
-				window.location.hash.replace('#', '?')
-			);
-			const oAuthSession = Object.fromEntries(allHashParams.entries());
-			dispatch(updateSession(oAuthSession));
-			updateOAuthSessionInLocalStorage(oAuthSession);
-			history.replaceState('', '', location.pathname);
-			toast.success('Signed in with our provider');
-		}
-
-		const oAuthSessionInLocalStorage = getOAuthSessionFromLocalStorage();
-		if (oAuthSessionInLocalStorage) {
-			dispatch(updateSession(oAuthSessionInLocalStorage));
-		}
-
-		const listener = supabase.auth.onAuthStateChange((event, session) => {
-			// if (!session) {
-			// 	dispatch(updateSession(null));
-			// }
+		const listener = supabase.auth.onAuthStateChange((_, session) => {
+			if (!session) {
+				dispatch(updateSession(null));
+			}
 			if (session) {
 				dispatch(updateSession(session));
 			}
 		});
-
 		return () => {
 			listener.data.subscription.unsubscribe();
 		};
-	}, []);
+	}, [window.location]);
+
 	return (
 		<BaseLayout
 			navLinksList={navLinksList}
