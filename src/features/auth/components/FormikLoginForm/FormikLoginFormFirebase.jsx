@@ -82,7 +82,7 @@ const FormikLoginForm = () => {
 				<Button
 					disabled={isLoading}
 					type='button'
-					variant='secondary'
+					$variant='secondary'
 					className='auth-provider-btn'>
 					<FcGoogle />
 					<span>Continue with Google</span>
@@ -92,7 +92,7 @@ const FormikLoginForm = () => {
 						{hasAccount ? 'Not a member yet?' : 'Already a member?'}
 						<Button
 							type='button'
-							variant='text'
+							$variant='text'
 							onClick={() => setHasAccount((prev) => !prev)}>
 							{hasAccount ? 'Signup here' : 'Login here'}
 						</Button>

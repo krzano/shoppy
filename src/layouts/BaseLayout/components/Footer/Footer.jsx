@@ -10,7 +10,7 @@ const Footer = ({ footerLinksList, socialLinksList }) => {
 	return (
 		<StyledFooter>
 			<StyledContentWrapper>
-				<LogoLink variant='secondary' />
+				<LogoLink $variant='secondary' />
 				<div className='grid-layout'>
 					{footerLinksList.map(({ id, title, links }) => {
 						return (

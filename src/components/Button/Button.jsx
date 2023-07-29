@@ -10,25 +10,25 @@ const StyledButton = styled.button`
 	border: 1px solid var(--color-primary-900);
 	cursor: pointer;
 	text-decoration: none;
-	${({ size }) => {
-		if (size === 'small') {
+	${({ $size }) => {
+		if ($size === 'small') {
 			return css`
-				font-size: 1.2rem;
+				font-$size: 1.2rem;
 			`;
 		}
-		if (size === 'medium') {
+		if ($size === 'medium') {
 			return css`
-				font-size: 1.6rem;
+				font-$size: 1.6rem;
 			`;
 		}
-		if (size === 'big') {
+		if ($size === 'big') {
 			return css`
-				font-size: 2rem;
+				font-$size: 2rem;
 			`;
 		}
 	}}
-	${({ variant }) => {
-		if (variant === 'primary') {
+	${({ $variant }) => {
+		if ($variant === 'primary') {
 			return css`
 				color: var(--color-neutral-0);
 				background-color: var(--color-primary-900);
@@ -38,7 +38,7 @@ const StyledButton = styled.button`
 				}
 			`;
 		}
-		if (variant === 'secondary') {
+		if ($variant === 'secondary') {
 			return css`
 				color: var(--color-primary-900);
 				background-color: var(--color-neutral-0);
@@ -48,9 +48,9 @@ const StyledButton = styled.button`
 				}
 			`;
 		}
-		if (variant === 'text') {
+		if ($variant === 'text') {
 			return css`
-				font-size: 1em;
+				font-$size: 1em;
 				border: none;
 				background: none;
 				padding: 0 0.7rem;
@@ -67,13 +67,13 @@ const StyledButton = styled.button`
 const Button = ({
 	as,
 	to,
-	variant = 'primary',
-	size = 'medium',
+	$variant = 'primary',
+	$size = 'medium',
 	children,
 	...rest
 }) => {
 	return (
-		<StyledButton as={as} to={to} variant={variant} size={size} {...rest}>
+		<StyledButton as={as} to={to} $variant={$variant} $size={$size} {...rest}>
 			{children}
 		</StyledButton>
 	);

@@ -75,7 +75,7 @@ const LoginForm = () => {
 					{hasAccount ? 'Not a member yet?' : 'Already a member?'}
 					<Button
 						type='button'
-						variant='text'
+						$variant='text'
 						onClick={() => setHasAccount((prev) => !prev)}>
 						{hasAccount ? 'Signup here' : 'Login here'}
 					</Button>

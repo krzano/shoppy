@@ -10,11 +10,11 @@ const StyledLogoLink = styled(Link)`
 	}
 `;
 
-const LogoLink = ({ variant = 'primary' }) => {
+const LogoLink = ({ $variant = 'primary' }) => {
 	return (
 		<StyledLogoLink to='/'>
 			<img
-				src={variant === 'primary' ? logoBlack : logoWhite}
+				src={$variant === 'primary' ? logoBlack : logoWhite}
 				alt='Shoppy logo'
 			/>
 		</StyledLogoLink>

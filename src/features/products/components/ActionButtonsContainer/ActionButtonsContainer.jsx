@@ -31,7 +31,7 @@ const BuyingButtonsContainer = ({ sku, stock }) => {
 					Buy Now
 				</Button>
 				<Button
-					variant='secondary'
+					$variant='secondary'
 					onClick={() => {
 						console.log(`Add to cart ${amount} pieces of ${sku}`);
 					}}>
