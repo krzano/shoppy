@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import ProductHeader from '../ProductHeader/ProductHeader';
 import Divider from '../../../../components/Divider/Divider';
 import PriceInfo from '../PriceInfo/PriceInfo';
-import BuyingButtonsContainer from '../BuyingButtonsContainer/BuyingButtonsContainer';
+import ActionButtonsContainer from '../ActionButtonsContainer/ActionButtonsContainer';
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 
 const ProductInfoContainer = ({
@@ -42,7 +42,7 @@ const ProductInfoContainer = ({
 					{sku.toUpperCase()}
 				</p>
 			</div>
-			<BuyingButtonsContainer stock={stock} sku={sku} />
+			<ActionButtonsContainer stock={stock} sku={sku} />
 			<DeliveryInfo />
 		</StyledProductInfoContainer>
 	);
