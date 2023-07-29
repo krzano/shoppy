@@ -5,18 +5,18 @@ const RatingStars = ({ rating, reviews }) => {
 	const stars = Array.from({ length: 5 }, (item, index) => {
 		if (rating >= index + 1)
 			return (
-				<span>
+				<span key={index}>
 					<BsStarFill />
 				</span>
 			);
 		if (rating >= index + 0.5)
 			return (
-				<span>
+				<span key={index}>
 					<BsStarHalf />
 				</span>
 			);
 		return (
-			<span>
+			<span key={index}>
 				<BsStar />
 			</span>
 		);
