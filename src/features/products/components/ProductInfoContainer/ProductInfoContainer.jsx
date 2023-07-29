@@ -57,7 +57,7 @@ const StyledProductInfoContainer = styled.div`
 		font-size: 1.4rem;
 		span {
 			font-weight: bold;
-			margin-right: 1rem;
+			margin-right: 0.5rem;
 			color: var(--color-neutral-700);
 		}
 		p {
