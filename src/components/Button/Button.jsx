@@ -13,17 +13,17 @@ const StyledButton = styled.button`
 	${({ $size }) => {
 		if ($size === 'small') {
 			return css`
-				font-$size: 1.2rem;
+				font-size: 1.2rem;
 			`;
 		}
 		if ($size === 'medium') {
 			return css`
-				font-$size: 1.6rem;
+				font-size: 1.6rem;
 			`;
 		}
 		if ($size === 'big') {
 			return css`
-				font-$size: 2rem;
+				font-size: 2rem;
 			`;
 		}
 	}}
@@ -50,7 +50,7 @@ const StyledButton = styled.button`
 		}
 		if ($variant === 'text') {
 			return css`
-				font-$size: 1em;
+				font-size: 1em;
 				border: none;
 				background: none;
 				padding: 0 0.7rem;
