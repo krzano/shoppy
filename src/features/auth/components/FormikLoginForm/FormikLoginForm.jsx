@@ -91,7 +91,7 @@ const FormikLoginForm = () => {
 					disabled={isLoading}
 					type='button'
 					$variant='secondary'
-					className='auth-provider-btn'
+					className='demo-account-btn'
 					onClick={() => {
 						loginUser({
 							email: 'testuser@email.com',
@@ -133,7 +133,7 @@ const StyledFormikLoginForm = styled(Form)`
 		color: var(--color-primary-900);
 	}
 
-	.auth-provider-btn {
+	.demo-account-btn {
 		display: flex;
 		justify-content: center;
 		align-items: center;
