@@ -20,7 +20,7 @@ const featuredCategories = [
 	{
 		id: 1,
 		text: 'mobile phones',
-		path: 'products?category=mobile-phones',
+		path: 'products?category=mobile phones',
 		$backgroundImg: categoryMobilePhonesImg,
 	},
 	{
