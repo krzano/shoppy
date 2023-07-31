@@ -5,3 +5,8 @@ export const formatPrice = (price) => {
 	}).format(price / 100);
 	return formattedPrice;
 };
+
+export const getUniqueValues = ({ data, key }) => {
+	let uniqueValues = data?.map((item) => item?.[key]);
+	return ['all', ...new Set(uniqueValues)];
+};
