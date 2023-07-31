@@ -15,9 +15,9 @@ const StyledDivider = styled.div`
 	}
 `;
 
-const Divider = ({ children }) => {
+const Divider = ({ children, ...props }) => {
 	return (
-		<StyledDivider>
+		<StyledDivider {...props}>
 			<div className='line' />
 			<span className={children && 'text'}>{children}</span>
 			<div className='line' />
