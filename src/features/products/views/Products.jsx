@@ -1,43 +1,91 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../productsSlice';
+import {
+	clearFilters,
+	filterProducts,
+	getAllProducts,
+	updateFilters,
+} from '../productsSlice';
 import { useEffect } from 'react';
 import { formatPrice } from '../../../utils/helpers';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
 import { Link, useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import Filters from '../components/Filters/Filters';
+import Divider from '../../../components/Divider/Divider';
+import ProductCard from '../components/ProductCard/ProductCard';
 
 const Products = () => {
-	const { isLoading, products } = useSelector((store) => store.products);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const { isLoading, isError, filteredProducts, filters } = useSelector(
+		(store) => store.products
+	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(clearFilters());
 		dispatch(getAllProducts());
+		if (searchParams.get('category')) {
+			dispatch(
+				updateFilters({
+					name: 'category',
+					value: searchParams.get('category'),
+				})
+			);
+		}
+		if (searchParams.get('company')) {
+			dispatch(
+				updateFilters({
+					name: 'company',
+					value: searchParams.get('company'),
+				})
+			);
+		}
 	}, []);
 
-	const [searchParams] = useSearchParams();
-	console.log(searchParams.get('category'));
-
 	if (isLoading) return <LoadingSpinner />;
-	if (products.length < 1) return <h2>There is no products to show...</h2>;
+	if (isError) return <h2>There was an error... Please try again later.</h2>;
+
 	return (
 		<StyledProducts>
 			<StyledContentWrapper>
-				<h2>Products</h2>
-				<div className='products-list'>
-					{products.map((product) => {
-						const { id, sku, name, company, image, short_description, price } =
-							product;
-						return (
-							<article key={sku}>
-								<div>
-									<p className='name'>{name}</p>
-									<p>{formatPrice(price)}</p>
-								</div>
-								<Link to={sku}>Details</Link>
-							</article>
-						);
-					})}
+				<Filters setSearchParams={setSearchParams} />
+				<div>
+					<Divider>{filteredProducts.length} Products Found</Divider>
+					{filteredProducts.length < 1 ? (
+						<h2>No products filling the requirements.</h2>
+					) : (
+						<div className='products-list'>
+							{filteredProducts.map((product) => {
+								const {
+									id,
+									sku,
+									name,
+									company,
+									image,
+									short_description,
+									price,
+									rating,
+									reviews,
+									color,
+								} = product;
+								return (
+									<ProductCard
+										key={sku}
+										sku={sku}
+										name={name}
+										company={company}
+										image={image}
+										short_description={short_description}
+										price={price}
+										rating={rating}
+										reviews={reviews}
+										color={color}
+									/>
+								);
+							})}
+						</div>
+					)}
 				</div>
 			</StyledContentWrapper>
 		</StyledProducts>
@@ -45,40 +93,30 @@ const Products = () => {
 };
 
 const StyledProducts = styled.div`
-	padding: 4rem 2rem;
+	padding: 4rem 1rem;
 	color: var(--color-neutral-700);
+	background-color: var(--color-neutral-50);
+	${StyledContentWrapper} {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
 	h2 {
 		margin-bottom: 2rem;
 	}
 	.products-list {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: 2rem;
+		margin-top: 2rem;
 	}
-	article {
-		display: grid;
-		grid-template-columns: 1fr auto;
-		justify-content: center;
-		align-items: center;
-		padding: 1rem 1.5rem;
-		border: 1px solid var(--color-neutral-300);
-		border-radius: var(--border-radius-sm);
-		box-shadow: var(--shadow-sm);
-	}
-	.name {
-		font-weight: bold;
-	}
-	a {
-		padding: 1em;
-		font-weight: bold;
-		font-size: 2rem;
-		color: var(--color-primary-700);
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
+	@media (min-width: 576px) {
+		padding: 6rem 2rem;
 	}
 	@media (min-width: 768px) {
+		${StyledContentWrapper} {
+			grid-template-columns: auto 1fr;
+		}
 		.products-list {
 			grid-template-columns: 1fr 1fr;
 		}
