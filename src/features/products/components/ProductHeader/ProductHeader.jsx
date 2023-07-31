@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import RatingStars from '../RatingStars/RatingStars';
+import { Link } from 'react-router-dom';
 
 const ProductHeader = ({
 	heading,
@@ -13,8 +14,12 @@ const ProductHeader = ({
 		<StyledProductHeader>
 			<h1>{heading}</h1>
 			<div className='tags'>
-				<p className='tag'>{company}</p>
-				<p className='tag'>{category}</p>
+				<Link to={`/products?company=${company}`} className='tag'>
+					{company}
+				</Link>
+				<Link to={`/products?category=${category}`} className='tag'>
+					{category}
+				</Link>
 			</div>
 			<p className='description'>{description}</p>
 			<RatingStars rating={rating} reviews={reviews} />
@@ -37,7 +42,7 @@ const StyledProductHeader = styled.header`
 		gap: 1rem;
 	}
 	.tag {
-		display: inline-block;
+		/* display: inline-block; */
 		padding: 0.5rem 2rem;
 		font-size: 1.6rem;
 		font-weight: 500;
@@ -45,7 +50,11 @@ const StyledProductHeader = styled.header`
 		color: var(--color-primary-900);
 		border-radius: var(--border-radius-pill);
 		background-color: var(--color-primary-50);
-		/* cursor: pointer; */
+		cursor: pointer;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 	.description {
 		margin-top: 0.5em;
