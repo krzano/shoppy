@@ -25,7 +25,7 @@ const SingleProduct = () => {
 		<StyledSingleProduct image={image}>
 			<StyledContentWrapper>
 				<ProductGallery image={image} name={name} />
-				<ProductInfoContainer {...product} />
+				<ProductInfoContainer {...product} product={product} />
 			</StyledContentWrapper>
 		</StyledSingleProduct>
 	);

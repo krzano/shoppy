@@ -7,19 +7,19 @@ import { HiSearch } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../cart/cartSlice';
 
-const ProductCard = ({
-	product_id,
-	name,
-	company,
-	image,
-	specs,
-	price,
-	rating,
-	reviews,
-	color,
-}) => {
+const ProductCard = ({ product }) => {
 	const dispatch = useDispatch();
-
+	const {
+		product_id,
+		name,
+		company,
+		image,
+		specs,
+		price,
+		rating,
+		reviews,
+		color,
+	} = product;
 	return (
 		<StyledProductCard>
 			<div className='image-container'>
@@ -45,7 +45,12 @@ const ProductCard = ({
 					$variant='secondary'
 					$size='small'
 					onClick={() => {
-						dispatch(addToCart({}));
+						dispatch(
+							addToCart({
+								amount: 1,
+								product,
+							})
+						);
 					}}>
 					Add to Cart
 				</Button>

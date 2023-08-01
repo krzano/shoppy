@@ -57,30 +57,8 @@ const Products = () => {
 					) : (
 						<div className='products-list'>
 							{filteredProducts.map((product) => {
-								const {
-									product_id,
-									name,
-									company,
-									image,
-									specs,
-									price,
-									rating,
-									reviews,
-									color,
-								} = product;
 								return (
-									<ProductCard
-										key={product_id}
-										product_id={product_id}
-										name={name}
-										company={company}
-										image={image}
-										specs={specs}
-										price={price}
-										rating={rating}
-										reviews={reviews}
-										color={color}
-									/>
+									<ProductCard key={product.product_id} product={product} />
 								);
 							})}
 						</div>

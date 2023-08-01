@@ -17,6 +17,7 @@ const ProductInfoContainer = ({
 	reviews,
 	specs,
 	stock,
+	product,
 }) => {
 	return (
 		<StyledProductInfoContainer>
@@ -41,7 +42,11 @@ const ProductInfoContainer = ({
 					{product_id.toUpperCase()}
 				</p>
 			</div>
-			<ActionButtonsContainer stock={stock} product_id={product_id} />
+			<ActionButtonsContainer
+				stock={stock}
+				// product_id={product_id}
+				product={product}
+			/>
 			<DeliveryInfo />
 		</StyledProductInfoContainer>
 	);

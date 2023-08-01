@@ -2,9 +2,14 @@ import { useState } from 'react';
 import Button from '../../../../components/Button/Button';
 import AmountButtons from '../../../../components/AmountButtons/AmountButtons';
 import { styled } from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addToCart, buyNow } from '../../../cart/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
-const BuyingButtonsContainer = ({ product_id, stock }) => {
+const BuyingButtonsContainer = ({ stock, product }) => {
 	const [amount, setAmount] = useState(1);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	return (
 		<StyledBuyingButtonsContainer>
@@ -25,15 +30,16 @@ const BuyingButtonsContainer = ({ product_id, stock }) => {
 			<div className='buttons-row'>
 				<Button
 					onClick={() => {
-						console.log(`dispatch(clearCart()) then dispatch(addToCart(${amount},${product_id})) then navigate('/checkout')
-            `);
+						dispatch(buyNow({ amount, product }));
+						navigate('/checkout');
 					}}>
 					Buy Now
 				</Button>
 				<Button
 					$variant='secondary'
 					onClick={() => {
-						console.log(`Add to cart ${amount} pieces of ${product_id}`);
+						dispatch(addToCart({ amount, product }));
+						setAmount(1);
 					}}>
 					Add to Cart
 				</Button>

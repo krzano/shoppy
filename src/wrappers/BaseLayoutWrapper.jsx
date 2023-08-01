@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { updateSession } from '../features/auth/authSlice';
 import supabase from '../services/supabase/supabase';
 import { useEffect } from 'react';
+import { calculateTotals } from '../features/cart/cartSlice';
+import { updateCartItemsInLocalStorage } from '../utils/localStorage';
 
 const navLinksList = [
 	{
@@ -143,7 +145,8 @@ const footerLinksList = [
 
 const BaseLayoutWrapper = ({ children }) => {
 	const dispatch = useDispatch();
-	const { currentUser, session } = useSelector((store) => store.auth);
+	const { session } = useSelector((store) => store.auth);
+	const { cartItems } = useSelector((store) => store.cart);
 
 	const dropdownItemsList = [
 		{
@@ -189,6 +192,11 @@ const BaseLayoutWrapper = ({ children }) => {
 			listener.data.subscription.unsubscribe();
 		};
 	}, [window.location]);
+
+	useEffect(() => {
+		dispatch(calculateTotals());
+		updateCartItemsInLocalStorage(cartItems);
+	}, [cartItems]);
 
 	return (
 		<BaseLayout

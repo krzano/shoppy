@@ -1,28 +1,12 @@
-const USER = 'user';
-const OAUTH_SESSION = 'oauth_session';
+const CART_ITEMS = 'CART_ITEMS';
 
-export const updateUserInLocalStorage = (user) => {
-	localStorage.setItem(USER, JSON.stringify(user));
+export const updateCartItemsInLocalStorage = (cartItems) => {
+	// localStorage.setItem(CART_ITEMS, JSON.stringify(cartItems || []));
+	localStorage.setItem(CART_ITEMS, JSON.stringify(cartItems));
 };
 
-export const removeUserFromLocalStorage = () => {
-	localStorage.removeItem(USER);
-};
-
-export const getUserFromLocalStorage = () => {
-	const user = localStorage.getItem(USER);
-	return JSON.parse(user);
-};
-
-export const updateOAuthSessionInLocalStorage = (session) => {
-	localStorage.setItem(OAUTH_SESSION, JSON.stringify(session));
-};
-
-export const removeOAuthSessionFromLocalStorage = () => {
-	localStorage.removeItem(OAUTH_SESSION);
-};
-
-export const getOAuthSessionFromLocalStorage = () => {
-	const session = localStorage.getItem(OAUTH_SESSION);
-	return JSON.parse(session);
+export const getCartItemsFromLocalStorage = () => {
+	const localStorageCartItems = JSON.parse(localStorage.getItem(CART_ITEMS));
+	// console.log(localStorageCartItems || []);
+	return localStorageCartItems || [];
 };
