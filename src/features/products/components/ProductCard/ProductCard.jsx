@@ -4,6 +4,7 @@ import { formatPrice } from '../../../../utils/helpers';
 import RatingStars from '../RatingStars/RatingStars';
 import Button from '../../../../components/Button/Button';
 import { HiSearch } from 'react-icons/hi';
+
 const ProductCard = ({
 	id,
 	sku,
@@ -39,8 +40,8 @@ const ProductCard = ({
 				<Button className='button' $variant='secondary' $size='small'>
 					Add to Cart
 				</Button>
-				<Button as={Link} to={sku} $variant='text'>
-					More info
+				<Button as={Link} to={sku} $size='small'>
+					Details
 				</Button>
 			</div>
 		</StyledProductCard>
@@ -56,11 +57,6 @@ const StyledProductCard = styled.article`
 	background-color: var(--color-neutral-0);
 	border-radius: var(--border-radius-lg);
 	border: 1px solid var(--color-primary-100);
-	.button-container {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
 	.image-container {
 		position: relative;
 		display: grid;
@@ -84,9 +80,6 @@ const StyledProductCard = styled.article`
 			opacity: 1;
 		}
 		a {
-			/* position: absolute; */
-			/* top: 2rem; */
-			/* right: 2rem; */
 			display: grid;
 			place-items: center;
 			width: 4rem;
@@ -107,7 +100,6 @@ const StyledProductCard = styled.article`
 		display: flex;
 		justify-content: space-between;
 		gap: 0.5rem;
-		/* font-weight: 500; */
 		font-weight: bold;
 		font-size: 2rem;
 	}
@@ -119,10 +111,13 @@ const StyledProductCard = styled.article`
 	.company {
 		margin-right: 0.5rem;
 		padding-right: 1rem;
-		/* font-weight: bold; */
 		border-right: 1px solid var(--color-neutral-300);
 		color: var(--color-neutral-500);
-		/* color: var(--color-primary-500); */
+	}
+	.button-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 `;
 
