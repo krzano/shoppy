@@ -115,9 +115,10 @@ const StyledProductCard = styled.article`
 		color: var(--color-neutral-500);
 	}
 	.button-container {
+		flex-grow: 1;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-end;
 	}
 `;
 
