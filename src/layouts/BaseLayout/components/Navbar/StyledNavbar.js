@@ -11,14 +11,14 @@ const StyledNavbar = styled.nav`
 	height: var(--height-navbar);
 	background-color: var(--color-neutral-0);
 	border-bottom: 1px solid var(--color-neutral-300);
-	z-index: 0;
+	z-index: 100;
 	.nav-header {
 		display: flex;
 		justify-content: flex-start;
 		align-items: stretch;
 	}
 	.content {
-		z-index: 100;
+		z-index: 1000;
 		display: grid;
 		grid-template-columns: 1fr auto auto;
 		align-items: center;
