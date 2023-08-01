@@ -4,10 +4,11 @@ import { formatPrice } from '../../../../utils/helpers';
 import RatingStars from '../RatingStars/RatingStars';
 import Button from '../../../../components/Button/Button';
 import { HiSearch } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../cart/cartSlice';
 
 const ProductCard = ({
-	id,
-	sku,
+	product_id,
 	name,
 	company,
 	image,
@@ -17,11 +18,13 @@ const ProductCard = ({
 	reviews,
 	color,
 }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<StyledProductCard>
 			<div className='image-container'>
 				<div className='details'>
-					<Link to={sku}>
+					<Link to={product_id}>
 						<HiSearch />
 					</Link>
 				</div>
@@ -37,10 +40,16 @@ const ProductCard = ({
 			</p>
 			<RatingStars rating={rating} reviews={reviews} />
 			<div className='button-container'>
-				<Button className='button' $variant='secondary' $size='small'>
+				<Button
+					className='button'
+					$variant='secondary'
+					$size='small'
+					onClick={() => {
+						dispatch(addToCart({}));
+					}}>
 					Add to Cart
 				</Button>
-				<Button as={Link} to={sku} $size='small'>
+				<Button as={Link} to={product_id} $size='small'>
 					Details
 				</Button>
 			</div>

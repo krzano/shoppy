@@ -5,8 +5,10 @@ import { useState } from 'react';
 import useClickOutside from '../../../../hooks/useClickOutside';
 import StyledUserButtons from './StyledUserButtons';
 import Dropdown from '../Dropdown/Dropdown';
+import { useSelector } from 'react-redux';
 
 const UserButtons = ({ dropdownItemsList }) => {
+	const { totalAmount } = useSelector((store) => store.cart);
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	const closeDropdown = () => {
@@ -25,7 +27,7 @@ const UserButtons = ({ dropdownItemsList }) => {
 					<HiOutlineShoppingCart className='btn-icon' />
 				</Link>
 				<div className='cart-items-number'>
-					<span>{'23'}</span>
+					<span>{totalAmount}</span>
 				</div>
 			</div>
 			<div className='bar'></div>

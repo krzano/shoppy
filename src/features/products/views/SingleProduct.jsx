@@ -10,7 +10,7 @@ export const loader = async ({ params: { id } }) => {
 	const { data: products, error } = await supabase
 		.from('products')
 		.select('*')
-		.eq('sku', id);
+		.eq('product_id', id);
 	console.log(products);
 	console.log(error);
 	return products;

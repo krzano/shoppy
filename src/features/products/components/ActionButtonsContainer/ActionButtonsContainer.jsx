@@ -3,7 +3,7 @@ import Button from '../../../../components/Button/Button';
 import AmountButtons from '../../../../components/AmountButtons/AmountButtons';
 import { styled } from 'styled-components';
 
-const BuyingButtonsContainer = ({ sku, stock }) => {
+const BuyingButtonsContainer = ({ product_id, stock }) => {
 	const [amount, setAmount] = useState(1);
 
 	return (
@@ -25,7 +25,7 @@ const BuyingButtonsContainer = ({ sku, stock }) => {
 			<div className='buttons-row'>
 				<Button
 					onClick={() => {
-						console.log(`dispatch(clearCart()) then dispatch(addToCart(${amount},${sku})) then navigate('/checkout')
+						console.log(`dispatch(clearCart()) then dispatch(addToCart(${amount},${product_id})) then navigate('/checkout')
             `);
 					}}>
 					Buy Now
@@ -33,7 +33,7 @@ const BuyingButtonsContainer = ({ sku, stock }) => {
 				<Button
 					$variant='secondary'
 					onClick={() => {
-						console.log(`Add to cart ${amount} pieces of ${sku}`);
+						console.log(`Add to cart ${amount} pieces of ${product_id}`);
 					}}>
 					Add to Cart
 				</Button>

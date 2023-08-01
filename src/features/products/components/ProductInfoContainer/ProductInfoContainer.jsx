@@ -6,17 +6,16 @@ import ActionButtonsContainer from '../ActionButtonsContainer/ActionButtonsConta
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 
 const ProductInfoContainer = ({
+	product_id,
 	category,
 	color,
 	company,
 	description,
-	id,
 	name,
 	price,
 	rating,
 	reviews,
 	specs,
-	sku,
 	stock,
 }) => {
 	return (
@@ -39,10 +38,10 @@ const ProductInfoContainer = ({
 				</p>
 				<p>
 					<span>Product ID: </span>
-					{sku.toUpperCase()}
+					{product_id.toUpperCase()}
 				</p>
 			</div>
-			<ActionButtonsContainer stock={stock} sku={sku} />
+			<ActionButtonsContainer stock={stock} product_id={product_id} />
 			<DeliveryInfo />
 		</StyledProductInfoContainer>
 	);
