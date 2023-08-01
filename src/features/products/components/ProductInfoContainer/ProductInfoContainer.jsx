@@ -15,14 +15,14 @@ const ProductInfoContainer = ({
 	price,
 	rating,
 	reviews,
-	short_description,
+	specs,
 	sku,
 	stock,
 }) => {
 	return (
 		<StyledProductInfoContainer>
 			<ProductHeader
-				heading={`${name} ${short_description}`}
+				heading={`${name} ${specs}`}
 				description={description}
 				rating={rating}
 				reviews={reviews}

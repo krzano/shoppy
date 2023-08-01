@@ -11,7 +11,7 @@ const ProductCard = ({
 	name,
 	company,
 	image,
-	short_description,
+	specs,
 	price,
 	rating,
 	reviews,
@@ -33,7 +33,7 @@ const ProductCard = ({
 			</header>
 			<p className='info'>
 				<span className='company'>{company}</span>
-				{` ${short_description || color}`}
+				{` ${specs || color}`}
 			</p>
 			<RatingStars rating={rating} reviews={reviews} />
 			<div className='button-container'>

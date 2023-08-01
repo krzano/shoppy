@@ -63,7 +63,7 @@ const Products = () => {
 									name,
 									company,
 									image,
-									short_description,
+									specs,
 									price,
 									rating,
 									reviews,
@@ -76,7 +76,7 @@ const Products = () => {
 										name={name}
 										company={company}
 										image={image}
-										short_description={short_description}
+										specs={specs}
 										price={price}
 										rating={rating}
 										reviews={reviews}
