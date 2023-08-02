@@ -42,11 +42,35 @@ const cartSlice = createSlice({
 			});
 			state.cartItems = newCartItems;
 		},
-		clearCart: () => {
-			return { ...initialState };
+		clearCart: (state) => {
+			state.cartItems = [];
 		},
-		increaseItemAmount: (state, { payload: id }) => {},
-		decreaseItemAmount: (state, { payload: id }) => {},
+		increaseItemAmount: (state, { payload: id }) => {
+			const newCartItems = state.cartItems.map((item) => {
+				if (item.product.product_id === id) {
+					let newAmount = item.amount + 1;
+					if (newAmount > item.product.stock) {
+						newAmount = item.product.stock;
+					}
+					return { ...item, amount: newAmount };
+				}
+				return item;
+			});
+			return { ...state, cartItems: newCartItems };
+		},
+		decreaseItemAmount: (state, { payload: id }) => {
+			const newCartItems = state.cartItems.map((item) => {
+				if (item.product.product_id === id) {
+					let newAmount = item.amount - 1;
+					if (newAmount < 1) {
+						newAmount = 1;
+					}
+					return { ...item, amount: newAmount };
+				}
+				return item;
+			});
+			return { ...state, cartItems: newCartItems };
+		},
 		calculateTotals: (state) => {
 			const { totalAmount, totalPrice } = state.cartItems.reduce(
 				(totals, { amount, product: { price } }) => {
