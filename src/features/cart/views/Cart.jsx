@@ -24,6 +24,7 @@ const Cart = () => {
 					</p>
 				</header>
 				<div className='grid-container'>
+					{/* TO ASK: prop or new useSelector in component */}
 					<CartItems cartItems={cartItems} totalAmount={totalAmount} />
 					<CartSummary />
 				</div>

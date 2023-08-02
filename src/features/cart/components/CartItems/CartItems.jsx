@@ -9,9 +9,9 @@ const CartItems = ({ cartItems, totalAmount }) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledCartItems>
-			
 			<div className='items-container'>
 				{cartItems.map((cartItem) => {
+					// TO ASK:
 					return <CartItem key={cartItem.product.product_id} {...cartItem} />;
 				})}
 				<Button
@@ -35,13 +35,10 @@ const StyledCartItems = styled.div`
 	.items-container {
 		display: grid;
 		gap: 2rem;
-		padding: 2rem;
-		border: 1px solid var(--color-neutral-300);
-		border-radius: var(--border-radius-lg);
 	}
 	.clear-cart-btn {
 		justify-self: flex-start;
-		margin-top: 1rem;
+		/* margin-bottom: 1rem; */
 	}
 `;
 
