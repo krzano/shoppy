@@ -11,10 +11,30 @@ const BuyingButtonsContainer = ({ stock, product }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const increaseAmount = () => {
+		let newAmount = amount + 1;
+		if (newAmount > stock) {
+			newAmount = stock;
+		}
+		setAmount(newAmount);
+	};
+	const decreaseAmount = () => {
+		let newAmount = amount - 1;
+		if (newAmount < 1) {
+			newAmount = 1;
+		}
+		setAmount(newAmount);
+	};
+
 	return (
 		<StyledBuyingButtonsContainer>
 			<div className='amount-row'>
-				<AmountButtons amount={amount} setAmount={setAmount} stock={stock} />
+				<AmountButtons
+					amount={amount}
+					handleIncrease={increaseAmount}
+					handleDecrease={decreaseAmount}
+					stock={stock}
+				/>
 				{stock > 30 ? (
 					<p className='amount-info'>
 						<span>{stock} items</span> in stock

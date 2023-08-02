@@ -1,28 +1,14 @@
 import { styled } from 'styled-components';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-const AmountButtons = ({ amount, setAmount, stock }) => {
-	const increase = () => {
-		let newAmount = amount + 1;
-		if (newAmount > stock) {
-			newAmount = stock;
-		}
-		setAmount(newAmount);
-	};
-	const decrease = () => {
-		let newAmount = amount - 1;
-		if (newAmount < 1) {
-			newAmount = 1;
-		}
-		setAmount(newAmount);
-	};
+const AmountButtons = ({ amount, handleIncrease, handleDecrease, stock }) => {
 	return (
 		<StyledAmountButtons>
-			<button onClick={decrease}>
+			<button onClick={handleDecrease}>
 				<AiOutlineMinus />
 			</button>
 			<span>{amount}</span>
-			<button onClick={increase}>
+			<button onClick={handleIncrease}>
 				<AiOutlinePlus />
 			</button>
 		</StyledAmountButtons>
