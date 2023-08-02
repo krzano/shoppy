@@ -19,7 +19,9 @@ const Cart = () => {
 			<StyledContentWrapper>
 				<header>
 					<h2>Shopping cart</h2>
-					<p>{totalAmount} Products</p>
+					<p>
+						{totalAmount} Product{totalAmount > 1 && 's'}
+					</p>
 				</header>
 				<div className='grid-container'>
 					<CartItems cartItems={cartItems} totalAmount={totalAmount} />
