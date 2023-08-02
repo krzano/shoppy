@@ -1,7 +1,10 @@
 import { css, styled } from 'styled-components';
 
 const StyledButton = styled.button`
-	display: inline-block;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
 	padding: 0.7em 2em;
 	font-weight: 500;
 	color: var(--color-neutral-0);
@@ -10,6 +13,9 @@ const StyledButton = styled.button`
 	border: 1px solid var(--color-primary-900);
 	cursor: pointer;
 	text-decoration: none;
+	svg {
+		font-size: 1.5em;
+	}
 	${({ $size }) => {
 		if ($size === 'small') {
 			return css`
@@ -24,6 +30,11 @@ const StyledButton = styled.button`
 		if ($size === 'big') {
 			return css`
 				font-size: 2rem;
+			`;
+		}
+		if ($size === 'auto') {
+			return css`
+				font-size: 1em;
 			`;
 		}
 	}}
@@ -45,6 +56,17 @@ const StyledButton = styled.button`
 				transition: background-color 0.3s;
 				&:hover {
 					background-color: var(--color-primary-100);
+				}
+			`;
+		}
+		if ($variant === 'danger') {
+			return css`
+				color: var(--color-red-700);
+				border-color: var(--color-red-700);
+				background-color: var(--color-neutral-0);
+				transition: background-color 0.3s;
+				&:hover {
+					background-color: var(--color-red-100);
 				}
 			`;
 		}
