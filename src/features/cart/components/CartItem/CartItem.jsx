@@ -21,14 +21,14 @@ const CartItem = ({
 			<div className='product-info'>
 				<p className='name'>{name}</p>
 				<div className='details'>
+					<p>
+						Company: <span>{company}</span>
+					</p>
 					{specs && (
 						<p>
 							Specs: <span>{specs}</span>
 						</p>
 					)}
-					<p>
-						Company: <span>{company}</span>
-					</p>
 					<p>
 						Color: <span>{color}</span>
 					</p>
