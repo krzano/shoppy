@@ -6,6 +6,7 @@ const initialState = {
 	totalAmount: 0,
 	totalPrice: 0,
 	shippingFee: 1999,
+	freeShippingOnOrdersOver: 50000,
 };
 
 const cartSlice = createSlice({
@@ -83,7 +84,13 @@ const cartSlice = createSlice({
 					totalPrice: 0,
 				}
 			);
-			return { ...state, totalAmount, totalPrice };
+			let newShippingFee;
+			if (totalPrice > state.freeShippingOnOrdersOver) {
+				newShippingFee = 0;
+			} else {
+				newShippingFee = initialState.shippingFee;
+			}
+			return { ...state, totalAmount, totalPrice, shippingFee: newShippingFee };
 		},
 	},
 });
