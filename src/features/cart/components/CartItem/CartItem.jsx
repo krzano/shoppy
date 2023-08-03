@@ -23,20 +23,18 @@ const CartItem = ({
 				<div className='details'>
 					{specs && (
 						<p>
-							<span>Specs:</span> {specs}
+							Specs: <span>{specs}</span>
 						</p>
 					)}
 					<p>
-						<span>Company:</span> {company}
+						Company: <span>{company}</span>
 					</p>
 					<p>
-						<span>Color:</span> {color}
+						Color: <span>{color}</span>
 					</p>
 				</div>
 				<p className='price'>{formatPrice(price * amount)}</p>
-				<p className={`piece-price ${amount === 1 && 'hidden'}`}>
-					Price per piece: {formatPrice(price)}
-				</p>
+				<p className='piece-price'>Price per piece: {formatPrice(price)}</p>
 			</div>
 			<div className='buttons'>
 				<AmountButtons
@@ -62,21 +60,19 @@ const CartItem = ({
 };
 
 const StyledCartItem = styled.article`
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr;
 	justify-content: center;
 	gap: 1rem;
 	padding: 2rem;
-	border: 1px solid var(--color-neutral-300);
+	border: 1px solid var(--color-primary-100);
 	border-radius: var(--border-radius-lg);
-
+	box-shadow: var(--shadow-md);
 	img {
+		justify-self: center;
 		text-align: center;
-		height: 100px;
+		height: 10rem;
 		object-fit: contain;
-	}
-	.hidden {
-		visibility: hidden;
 	}
 	.name,
 	.price {
@@ -87,16 +83,16 @@ const StyledCartItem = styled.article`
 		margin-bottom: 0.5rem;
 	}
 	.details {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 2rem;
 		margin-bottom: 1.5rem;
 		font-size: 1.4rem;
 		color: var(--color-neutral-500);
-		p {
-			text-transform: capitalize;
-			font-weight: bold;
-		}
+		text-transform: capitalize;
+		font-weight: 500;
 		span {
-			margin-right: 0.5rem;
-			font-weight: 500;
+			color: var(--color-neutral-700);
 		}
 	}
 	.piece-price {
@@ -104,12 +100,28 @@ const StyledCartItem = styled.article`
 		font-weight: 500;
 		color: var(--color-neutral-500);
 	}
-
 	.buttons {
 		display: grid;
-		grid-template-columns: 1fr auto;
+		grid-template-columns: clamp(14rem, 70%, 24rem) auto;
+		justify-content: space-between;
 		gap: 1rem;
 		font-size: 1.4rem;
+	}
+	@media (min-width: 992px) {
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 2rem;
+		padding: 3rem 2rem;
+		img {
+			height: 12rem;
+			width: 12rem;
+		}
+		.buttons {
+			justify-self: end;
+			grid-template-columns: 1fr auto;
+			justify-content: center;
+			width: 22rem;
+		}
 	}
 `;
 
