@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { formatPrice } from '../../../../utils/helpers';
 import Button from '../../../../components/Button/Button';
 import Divider from '../../../../components/Divider/Divider';
+import { Link } from 'react-router-dom';
 const CartSummary = () => {
 	const { totalPrice, shippingFee } = useSelector((store) => store.cart);
 	const { session } = useSelector((store) => store.auth);
@@ -15,14 +16,23 @@ const CartSummary = () => {
 			</p>
 			<p>
 				Shipping fee:
-				<span>{shippingFee === 0 ? 'GRATIS' : formatPrice(shippingFee)}</span>
+				{shippingFee === 0 ? (
+					<span className='free-shipping'>Free</span>
+				) : (
+					<span>{formatPrice(shippingFee)}</span>
+				)}
 			</p>
 			<Divider />
 			<h3>
 				Total:
 				<span>{formatPrice(totalPrice + shippingFee)}</span>
 			</h3>
-			<Button>{session ? 'Proceed to Checkout' : 'Login to Continue'}</Button>
+			<Button
+				className='summary-btn'
+				as={Link}
+				to={session ? '/checkout' : '/login'}>
+				{session ? 'Proceed to Checkout' : 'Login to Continue'}
+			</Button>
 		</StyledCartSummary>
 	);
 };
@@ -33,13 +43,24 @@ const StyledCartSummary = styled.div`
 	display: grid;
 	gap: 2rem;
 	padding: 2rem;
-	background-color: var(--color-neutral-50);
+	background-color: var(--color-neutral-0);
 	border-radius: var(--border-radius-lg);
-	border: 1px solid var(--color-neutral-300);
+	border: 2px solid var(--color-primary-100);
+	box-shadow: var(--shadow-md);
 	h3,
 	p {
 		display: flex;
 		justify-content: space-between;
+	}
+	h3 {
+		font-size: 2rem;
+	}
+	.free-shipping {
+		font-weight: bold;
+		color: var(--color-primary-700);
+	}
+	.summary-btn {
+		text-align: center;
 	}
 `;
 
