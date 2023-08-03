@@ -73,6 +73,8 @@ function App() {
 					top: '9rem',
 					left: '50%',
 					translate: '-50%',
+					padding: '0.5rem 3rem',
+					marginBottom: '1rem',
 					maxWidth: '80vw',
 					fontFamily: 'Poppins, sans-serif',
 					textAlign: 'center',
@@ -83,7 +85,7 @@ function App() {
 				icon={false}
 				closeButton={false}
 				position='top-center'
-				autoClose={1500}
+				autoClose={1600}
 				transition={Flip}
 			/>
 			<RouterProvider router={router} />

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCartItemsFromLocalStorage } from '../../utils/localStorage';
+import { toast } from 'react-toastify';
 
 const initialState = {
 	cartItems: getCartItemsFromLocalStorage() || [],
@@ -27,6 +28,13 @@ const cartSlice = createSlice({
 						if (newAmount > item.product.stock) {
 							newAmount = item.product.stock;
 						}
+						newAmount - item.amount === 0
+							? toast.error('Maximum amount is already in cart')
+							: toast.success(
+									`${newAmount - item.amount}x ${
+										item.product.name
+									} added to your cart`
+							  );
 						return { ...item, amount: newAmount };
 					}
 					return item;
@@ -34,16 +42,21 @@ const cartSlice = createSlice({
 				return { ...state, cartItems: newCartItems };
 			} else {
 				const newCartItem = { amount, product };
+				toast.success(`${amount}x ${product.name} added to your cart`);
 				return { ...state, cartItems: [...state.cartItems, newCartItem] };
 			}
 		},
 		removeFromCart: (state, { payload: id }) => {
 			const newCartItems = state.cartItems.filter((cartItem) => {
+				if (cartItem.product.product_id === id) {
+					toast.success(`${cartItem.product.name} removed from your cart`);
+				}
 				return cartItem.product.product_id !== id;
 			});
 			state.cartItems = newCartItems;
 		},
 		clearCart: (state) => {
+			toast.success('All products removed from your cart');
 			state.cartItems = [];
 		},
 		increaseItemAmount: (state, { payload: id }) => {
