@@ -12,6 +12,7 @@ import SingleProduct, {
 } from './features/products/views/SingleProduct';
 import Login from './features/auth/views/Login';
 import ProtectedLoginFormRoute from './routes/ProtectedLoginFormRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import { Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'checkout',
-				element: <Checkout />,
+				element: (
+					<ProtectedRoute>
+						<Checkout />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'login',
