@@ -41,12 +41,16 @@ const StyledCart = styled.div`
 	.grid-container {
 		display: grid;
 		gap: 2rem;
+		row-gap: 5rem;
 	}
 	@media (min-width: 576px) {
 		.grid-container {
-			grid-template-columns: 1fr auto;
+			grid-template-columns: 1fr clamp(28rem, 50%, 32rem);
 			align-items: start;
 		}
+	}
+	@media (min-width: 768px) {
+		padding: 6rem 4rem;
 	}
 `;
 

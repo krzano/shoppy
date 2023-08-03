@@ -3,9 +3,9 @@ import CartItem from '../CartItem/CartItem';
 import Button from '../../../../components/Button/Button';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../../cartSlice';
-import Divider from '../../../../components/Divider/Divider';
+// import { BsCartX } from 'react-icons/bs';
 
-const CartItems = ({ cartItems, totalAmount }) => {
+const CartItems = ({ cartItems }) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledCartItems>
@@ -22,6 +22,7 @@ const CartItems = ({ cartItems, totalAmount }) => {
 						dispatch(clearCart());
 					}}>
 					Clear Cart
+					{/* <BsCartX /> */}
 				</Button>
 			</div>
 		</StyledCartItems>
@@ -29,16 +30,12 @@ const CartItems = ({ cartItems, totalAmount }) => {
 };
 
 const StyledCartItems = styled.div`
-	header {
-		margin-bottom: 2rem;
-	}
 	.items-container {
 		display: grid;
 		gap: 2rem;
 	}
 	.clear-cart-btn {
-		justify-self: flex-start;
-		/* margin-bottom: 1rem; */
+		justify-self: start;
 	}
 `;
 
