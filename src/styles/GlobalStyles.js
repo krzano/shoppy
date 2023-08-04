@@ -61,10 +61,24 @@ const GlobalStyles = createGlobalStyle`
   --transition: color 0.3s, background-color 0.3s;
   
   --height-navbar:8rem;
-  /* toastify styles */
+
+  /* Custom styles for React-Toastify toasts */
   --toastify-color-progress-success: var(--color-primary-500);
   --toastify-color-progress-error: var(--color-red-700);
-  /* end of toastify styles */
+  .Toastify__toast{
+	top: 9rem;
+	left: 50%;
+	translate: -50%;
+	padding: 0.5em 3em;
+	margin-bottom: 1rem;
+	max-width: 80vw;
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	border-radius: var(--border-radius-pill);
+	border: 1px solid var(--color-neutral-300);
+	background-color: var(--color-neutral-50);
+  }
+  /* End of custom styles for React-Toastify toasts */
 }
 
 

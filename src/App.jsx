@@ -69,19 +69,6 @@ function App() {
 		<>
 			<GlobalStyles />
 			<ToastContainer
-				toastStyle={{
-					top: '9rem',
-					left: '50%',
-					translate: '-50%',
-					padding: '0.5rem 3rem',
-					marginBottom: '1rem',
-					maxWidth: '80vw',
-					fontFamily: 'Poppins, sans-serif',
-					textAlign: 'center',
-					borderRadius: 'var(--border-radius-pill)',
-					border: '1px solid var(--color-neutral-300)',
-					backgroundColor: 'var(--color-neutral-50)',
-				}}
 				icon={false}
 				closeButton={false}
 				position='top-center'
