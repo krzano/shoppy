@@ -11,7 +11,8 @@ const StyledNavbar = styled.nav`
 	height: var(--height-navbar);
 	background-color: var(--color-neutral-0);
 	border-bottom: 1px solid var(--color-neutral-300);
-	z-index: 100;
+	/* z-index has to be more than 9999 to display the Navbar over the ToastContainer */
+	z-index: 10000;
 	.nav-header {
 		display: flex;
 		justify-content: flex-start;
