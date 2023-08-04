@@ -14,7 +14,7 @@ const FilterField = ({
 }) => {
 	if (select && !optionsList && $variant !== 'sort') {
 		console.warn(
-			'Please provide optionslist prop if select=true in FilterField component!'
+			'Please provide optionslist prop in FilterField component!'
 		);
 	}
 	return (
