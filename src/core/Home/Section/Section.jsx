@@ -3,6 +3,7 @@ import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledCon
 
 const StyledSection = styled.section`
 	padding: 8rem 4rem 10rem;
+	overflow-x: hidden;
 	h2 {
 		margin-bottom: 1em;
 		color: var(--color-neutral-700);

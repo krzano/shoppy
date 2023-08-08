@@ -5,7 +5,9 @@ const StyledNavbar = styled.nav`
 	/* FIXED NAVBAR STYLES */
 	position: fixed;
 	top: 0;
+	left: 0;
 	width: 100%;
+	/* right: 0; */
 	/* FIXED NAVBAR STYLES */
 	display: flex;
 	justify-content: center;
