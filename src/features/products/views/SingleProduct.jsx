@@ -20,12 +20,12 @@ const SingleProduct = () => {
 	const data = useLoaderData();
 	console.log('loader data', data);
 	const product = data[0];
-	const { image, name } = product;
+	const { image, name, images } = product;
 	return (
 		<StyledSingleProduct image={image}>
 			<StyledContentWrapper>
-				<ProductGallery image={image} name={name} />
-				<ProductInfoContainer {...product} product={product} />
+				<ProductGallery image={image} name={name} images={images} />
+				<ProductInfoContainer product={product} />
 			</StyledContentWrapper>
 		</StyledSingleProduct>
 	);
