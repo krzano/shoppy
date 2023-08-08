@@ -5,20 +5,20 @@ import PriceInfo from '../PriceInfo/PriceInfo';
 import ActionButtonsContainer from '../ActionButtonsContainer/ActionButtonsContainer';
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 
-const ProductInfoContainer = ({
-	product_id,
-	category,
-	color,
-	company,
-	description,
-	name,
-	price,
-	rating,
-	reviews,
-	specs,
-	stock,
-	product,
-}) => {
+const ProductInfoContainer = ({ product }) => {
+	const {
+		product_id,
+		category,
+		color,
+		company,
+		description,
+		name,
+		price,
+		rating,
+		reviews,
+		specs,
+		stock,
+	} = product;
 	return (
 		<StyledProductInfoContainer>
 			<ProductHeader
@@ -42,11 +42,7 @@ const ProductInfoContainer = ({
 					{product_id.toUpperCase()}
 				</p>
 			</div>
-			<ActionButtonsContainer
-				stock={stock}
-				// product_id={product_id}
-				product={product}
-			/>
+			<ActionButtonsContainer stock={stock} product={product} />
 			<DeliveryInfo />
 		</StyledProductInfoContainer>
 	);

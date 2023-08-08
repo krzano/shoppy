@@ -1,46 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	clearFilters,
-	filterProducts,
-	getAllProducts,
-	updateFilters,
-} from '../productsSlice';
+import { getAllProducts } from '../productsSlice';
 import { useEffect } from 'react';
-import { formatPrice } from '../../../utils/helpers';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
-import { Link, useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Filters from '../components/Filters/Filters';
 import Divider from '../../../components/Divider/Divider';
 import ProductCard from '../components/ProductCard/ProductCard';
 
 const Products = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const { isLoading, isError, filteredProducts, filters } = useSelector(
+	const { isLoading, isError, filteredProducts } = useSelector(
 		(store) => store.products
 	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(clearFilters());
 		dispatch(getAllProducts());
-		if (searchParams.get('category')) {
-			dispatch(
-				updateFilters({
-					name: 'category',
-					value: searchParams.get('category'),
-				})
-			);
-		}
-		if (searchParams.get('company')) {
-			dispatch(
-				updateFilters({
-					name: 'company',
-					value: searchParams.get('company'),
-				})
-			);
-		}
 	}, []);
 
 	if (isLoading) return <LoadingSpinner />;
@@ -49,7 +24,7 @@ const Products = () => {
 	return (
 		<StyledProducts>
 			<StyledContentWrapper>
-				<Filters setSearchParams={setSearchParams} />
+				<Filters />
 				<div>
 					<Divider>{filteredProducts.length} Products Found</Divider>
 					{filteredProducts.length < 1 ? (

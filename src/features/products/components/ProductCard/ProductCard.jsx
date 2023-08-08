@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
 		<StyledProductCard>
 			<div className='image-container'>
 				<div className='details'>
-					<Link to={product_id}>
+					<Link to={`/products/${product_id}`}>
 						<HiSearch />
 					</Link>
 				</div>

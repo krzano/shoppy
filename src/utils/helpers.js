@@ -6,7 +6,13 @@ export const formatPrice = (price) => {
 	return formattedPrice;
 };
 
-export const getUniqueValues = ({ data, key }) => {
-	let uniqueValues = data?.map((item) => item?.[key]);
-	return ['all', ...new Set(uniqueValues)];
+export const getUniqueOptions = ({ data, key }) => {
+	const all = { id: 'all', value: 'all', label: 'all' };
+	const uniqueOptions = new Set(data?.map((item) => item?.[key]));
+	const mappedOptions = [...uniqueOptions].map((option) => ({
+		id: option,
+		value: option,
+		label: option,
+	}));
+	return [all, ...mappedOptions];
 };

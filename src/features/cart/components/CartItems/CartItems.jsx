@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 import CartItem from '../CartItem/CartItem';
 import Button from '../../../../components/Button/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../cartSlice';
 // import { BsCartX } from 'react-icons/bs';
 
-const CartItems = ({ cartItems }) => {
+const CartItems = () => {
+	const { cartItems } = useSelector((store) => store.cart);
 	const dispatch = useDispatch();
 	return (
 		<StyledCartItems>

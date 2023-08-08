@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { addToCart, buyNow } from '../../../cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
-const BuyingButtonsContainer = ({ stock, product }) => {
+const BuyingButtonsContainer = ({ product }) => {
+	const { stock } = product;
 	const [amount, setAmount] = useState(1);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

@@ -19,7 +19,7 @@ const CartItem = ({
 		<StyledCartItem>
 			<img src={image} alt={name} />
 			<div className='product-info'>
-				<p className='name'>{name}</p>
+				<h3 className='name'>{name}</h3>
 				<div className='details'>
 					<p>
 						Company: <span>{company}</span>

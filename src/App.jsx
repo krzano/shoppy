@@ -15,6 +15,7 @@ import ProtectedLoginFormRoute from './routes/ProtectedLoginFormRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import { Flip } from 'react-toastify';
+import ScrollToTopOnMount from './components/ScrollToTopOnMount/ScrollToTopOnMount';
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
@@ -25,7 +26,14 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Home />,
+				element: (
+					<>
+						{/* TO ASK */}
+						{/* TODO: Fix scrolling when user clicks browsers back button */}
+						{/* <ScrollToTopOnMount /> */}
+						<Home />
+					</>
+				),
 			},
 			{
 				path: 'about',

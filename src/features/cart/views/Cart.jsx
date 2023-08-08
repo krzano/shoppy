@@ -5,9 +5,9 @@ import CartItems from '../components/CartItems/CartItems';
 import { styled } from 'styled-components';
 import CartSummary from '../components/CartSummary/CartSummary';
 const Cart = () => {
-	const { cartItems, totalAmount } = useSelector((store) => store.cart);
+	const { totalAmount } = useSelector((store) => store.cart);
 
-	if (cartItems.length < 1) {
+	if (totalAmount < 1) {
 		return (
 			<StyledCart>
 				<EmptyCart />
@@ -24,8 +24,7 @@ const Cart = () => {
 					</p>
 				</header>
 				<div className='grid-container'>
-					{/* TO ASK: prop or new useSelector in component */}
-					<CartItems cartItems={cartItems} totalAmount={totalAmount} />
+					<CartItems />
 					<CartSummary />
 				</div>
 			</StyledContentWrapper>

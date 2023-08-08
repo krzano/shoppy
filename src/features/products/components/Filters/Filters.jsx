@@ -1,77 +1,118 @@
 import { styled } from 'styled-components';
-import Divider from '../../../../components/Divider/Divider';
 import Button from '../../../../components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	clearFilters,
 	filterProducts,
-	updateFilters,
+	searchProducts,
+	sortProducts,
 } from '../../productsSlice';
-import { getUniqueValues } from '../../../../utils/helpers';
-import { useEffect, useState } from 'react';
-import FilterField from '../FilterField/FilterField';
+import { getUniqueOptions } from '../../../../utils/helpers';
+import { useEffect } from 'react';
+import SelectField from '../SelectField/SelectField';
+import SearchField from '../SearchField/SearchField';
+import { useSearchParams } from 'react-router-dom';
+import { sortValues } from '../../../../utils/filterValues';
 
-const Filters = ({ setSearchParams }) => {
+const sortOptions = [
+	{
+		id: sortValues.NAME_AZ,
+		value: sortValues.NAME_AZ,
+		label: 'Name (A-Z)',
+	},
+	{
+		id: sortValues.NAME_ZA,
+		value: sortValues.NAME_ZA,
+		label: 'Name (Z-A)',
+	},
+	{
+		id: sortValues.PRICE_LOWEST,
+		value: sortValues.PRICE_LOWEST,
+		label: 'Price (low to high)',
+	},
+	{
+		id: sortValues.PRICE_HIGHEST,
+		value: sortValues.PRICE_HIGHEST,
+		label: 'Price (high to low)',
+	},
+];
+
+const Filters = () => {
 	const dispatch = useDispatch();
-	// const [showFilters, setShowFilters] = useState(false);
+	const [searchParams, setSearchParams] = useSearchParams();
 	const { allProducts, filters } = useSelector((store) => store.products);
 	const { search, company, category, sortBy } = filters;
 
 	useEffect(() => {
+		if (searchParams.get('category')) {
+			dispatch(
+				filterProducts({
+					name: 'category',
+					value: searchParams.get('category'),
+				})
+			);
+		}
+		if (searchParams.get('company')) {
+			dispatch(
+				filterProducts({
+					name: 'company',
+					value: searchParams.get('company'),
+				})
+			);
+		}
 		setSearchParams('', '');
-		dispatch(filterProducts());
 	}, [allProducts, filters]);
 
-	const companies = getUniqueValues({
+	const companies = getUniqueOptions({
 		data: allProducts,
 		key: 'company',
 	});
-	const categories = getUniqueValues({
+	const categories = getUniqueOptions({
 		data: allProducts,
 		key: 'category',
 	});
-	const colors = getUniqueValues({
-		data: allProducts,
-		key: 'colors',
-	});
 
-	const handleChange = (e) => {
+	const handleSearchChange = (e) => {
+		const { value } = e.target;
+		dispatch(searchProducts(value));
+	};
+	const handleFiltersChange = (e) => {
 		const { name, value } = e.target;
-		dispatch(updateFilters({ name, value }));
+		dispatch(filterProducts({ name, value }));
+	};
+	const handleSortChange = (e) => {
+		const { value } = e.target;
+		dispatch(sortProducts(value));
 	};
 
 	return (
 		<>
 			<StyledFilters>
-				<FilterField
-					input
-					name='search'
-					type='search'
+				<SearchField
+					id='search'
 					value={search}
-					onChange={handleChange}
+					onChange={handleSearchChange}
 					placeholder='e.g. watch'
 				/>
-				<FilterField
-					select
-					optionsList={companies}
+				<SelectField
 					name='company'
 					value={company}
-					onChange={handleChange}
+					optionsList={companies}
+					onChange={handleFiltersChange}
 				/>
-				<FilterField
-					select
-					optionsList={categories}
+				<SelectField
 					name='category'
 					value={category}
-					onChange={handleChange}
+					optionsList={categories}
+					onChange={handleFiltersChange}
 				/>
-				<FilterField
-					select
+				<SelectField
 					$variant='sort'
 					name='sortBy'
 					labelText='Sort By'
 					value={sortBy}
-					onChange={handleChange}
+					optionsList={sortOptions}
+					onChange={handleSortChange}
 				/>
 				<Button
 					$size='small'
@@ -81,34 +122,15 @@ const Filters = ({ setSearchParams }) => {
 					Clear filters
 				</Button>
 			</StyledFilters>
-			{/* <StyledShowFiltersButton>
-				<Divider>
-					<Button
-						$variant='secondary'
-						$size='small'
-						onClick={() => {
-							setShowFilters((prev) => !prev);
-						}}>
-						{showFilters ? 'HIDE FILTERS' : 'SHOW FILTERS'}
-					</Button>
-				</Divider>
-			</StyledShowFiltersButton> */}
 		</>
 	);
 };
-
-// const StyledShowFiltersButton = styled.div`
-// 	@media (min-width: 768px) {
-// 		display: none;
-// 	}
-// `;
 
 const StyledFilters = styled.div`
 	height: 100%;
 	align-content: start;
 	justify-content: start;
 	font-size: 1.4rem;
-	/* font-weight: 500; */
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 2rem;
