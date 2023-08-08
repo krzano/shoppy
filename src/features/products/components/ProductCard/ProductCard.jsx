@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
 					}}>
 					Add to Cart
 				</Button>
-				<Button as={Link} to={product_id} $size='small'>
+				<Button as={Link} to={`/products/${product_id}`} $size='small'>
 					Details
 				</Button>
 			</div>
