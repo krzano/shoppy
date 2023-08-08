@@ -1,10 +1,12 @@
 import { styled } from 'styled-components';
 
 const StyledNavbar = styled.nav`
-	/* position: fixed; */
-	/* top: 0; */
-	/* width: 100%; */
-	position: relative;
+	/* position: relative; */
+	/* FIXED NAVBAR STYLES */
+	position: fixed;
+	top: 0;
+	width: 100%;
+	/* FIXED NAVBAR STYLES */
 	display: flex;
 	justify-content: center;
 	align-items: center;

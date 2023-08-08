@@ -6,8 +6,10 @@ import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const StyledMain = styled.main`
+	/* FIXED NAVBAR STYLES */
+	margin-top: var(--height-navbar);
+	/* FIXED NAVBAR STYLES */
 	display: block;
-	/* margin-top: var(--height-navbar); */
 	min-height: calc(100vh - var(--height-navbar));
 `;
 
