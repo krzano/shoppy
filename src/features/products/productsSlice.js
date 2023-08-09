@@ -55,6 +55,7 @@ const productsSlice = createSlice({
 			state.filters[name] = value;
 		},
 		searchProducts: (state, { payload: search }) => {
+			// TODO TO ASK TO FIX: (probably search has to be put inside filterProducts reducer)
 			let tempProducts = state.allProducts;
 			tempProducts = tempProducts.filter((product) => {
 				return product.name.toLowerCase().includes(search.toLowerCase());
@@ -64,13 +65,26 @@ const productsSlice = createSlice({
 		},
 		filterProducts: (state, { payload }) => {
 			const { name, value } = payload;
+			const newFilters = { ...state.filters, [name]: value };
 			let tempProducts = state.allProducts;
-			if (value !== 'all') {
-				tempProducts = tempProducts.filter(
-					(product) => product[name] === value
-				);
+			// Search fix
+			// if (name === 'search' && value !== '') {
+			// 	tempProducts = tempProducts.filter((product) => {
+			// 		return product.name
+			// 			.toLowerCase()
+			// 			.includes(newFilters[key].toLowerCase());
+			// 	});
+			// }
+			// Search fix
+			for (const key in newFilters) {
+				if (key !== 'search' && key !== 'sortBy' && newFilters[key] !== 'all') {
+					console.log(key, newFilters[key]);
+					tempProducts = tempProducts.filter(
+						(product) => product[key] === newFilters[key]
+					);
+				}
 			}
-			state.filters = { ...state.filters, [name]: value };
+			state.filters = newFilters;
 			state.filteredProducts = tempProducts;
 		},
 		sortProducts: (state, { payload: sortBy }) => {

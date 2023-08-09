@@ -8,7 +8,7 @@ import {
 	sortProducts,
 } from '../../productsSlice';
 import { getUniqueOptions } from '../../../../utils/helpers';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SelectField from '../SelectField/SelectField';
 import SearchField from '../SearchField/SearchField';
 import { useSearchParams } from 'react-router-dom';
@@ -44,24 +44,16 @@ const Filters = () => {
 	const { search, company, category, sortBy } = filters;
 
 	useEffect(() => {
-		if (searchParams.get('category')) {
-			dispatch(
-				filterProducts({
-					name: 'category',
-					value: searchParams.get('category'),
-				})
-			);
-		}
-		if (searchParams.get('company')) {
-			dispatch(
-				filterProducts({
-					name: 'company',
-					value: searchParams.get('company'),
-				})
-			);
-		}
-		setSearchParams('', '');
-	}, [allProducts, filters]);
+		// TO FIX NOT WORKING PROPERLY ONLY ONE FILTER UPDATES
+		// for (const [name, value] of searchParams.entries()) {
+		// 	console.log(`${name}: ${value}`);
+		// 	dispatch(filterProducts({ name, value }));
+		// }
+		const searchParamsObject = Object.fromEntries([...searchParams]);
+		Object.keys(searchParamsObject).forEach((key) => {
+			dispatch(filterProducts({ name: key, value: searchParamsObject[key] }));
+		});
+	}, [allProducts]);
 
 	const companies = getUniqueOptions({
 		data: allProducts,
@@ -73,11 +65,20 @@ const Filters = () => {
 	});
 
 	const handleSearchChange = (e) => {
-		const { value } = e.target;
+		const { name, value } = e.target;
 		dispatch(searchProducts(value));
+		// dispatch(filterProducts({ name, value }));
 	};
 	const handleFiltersChange = (e) => {
 		const { name, value } = e.target;
+		setSearchParams((params) => {
+			if (!value) {
+				params.delete(name);
+			} else {
+				params.set(name, value);
+			}
+			return params;
+		});
 		dispatch(filterProducts({ name, value }));
 	};
 	const handleSortChange = (e) => {
