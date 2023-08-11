@@ -7,7 +7,7 @@ const addressSchema = yup.object().shape({
 	city: yup.string().required('Required'),
 	postalCode: yup.string().required('Required'),
 	phoneNumber: yup
-		.number('Make sure it is a proper number')
+		.string('Make sure it is a proper number')
 		.required('Required'),
 	// country: yup.string().required('Required'),
 });
