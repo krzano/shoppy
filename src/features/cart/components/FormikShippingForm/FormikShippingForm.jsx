@@ -4,10 +4,13 @@ import FormikTextField from '../../../../components/FormikTextField/FormikTextFi
 import FormikSelectField from '../../../../components/FormikSelectField/FormikSelectField';
 import Button from '../../../../components/Button/Button';
 import addressSchema from '../../../../lib/yup/schemas/addressSchema';
+import { UseStepsContext } from '../CheckoutSteps/CheckoutSteps';
 
-const FormikAddressForm = () => {
+const FormikShippingForm = () => {
+	const { handleNextStep } = UseStepsContext();
+
 	return (
-		<StyledFormikAddressForm>
+		<StyledFormikShippingForm>
 			<h2>Shipping info</h2>
 			<Formik
 				initialValues={{
@@ -19,7 +22,12 @@ const FormikAddressForm = () => {
 					phoneNumber: '+1',
 					country: 'US',
 				}}
-				validationSchema={addressSchema}>
+				validationSchema={addressSchema}
+				onSubmit={(values) => {
+					handleNextStep();
+					console.log('submit');
+					console.log(values);
+				}}>
 				<StyledFormikForm>
 					<FormikTextField
 						className='full-width'
@@ -59,16 +67,16 @@ const FormikAddressForm = () => {
 						className='full-width'>
 						<option value='US'>United States</option>
 					</FormikSelectField>
-					<Button className='full-width' $variant='secondary'>
+					<Button type='submit' className='full-width' $variant='secondary'>
 						Save Address
 					</Button>
 				</StyledFormikForm>
 			</Formik>
-		</StyledFormikAddressForm>
+		</StyledFormikShippingForm>
 	);
 };
 
-const StyledFormikAddressForm = styled.div`
+const StyledFormikShippingForm = styled.div`
 	padding: 4rem 2rem 6rem;
 	display: flex;
 	flex-direction: column;
@@ -97,4 +105,4 @@ const StyledFormikForm = styled(Form)`
 	}
 `;
 
-export default FormikAddressForm;
+export default FormikShippingForm;
