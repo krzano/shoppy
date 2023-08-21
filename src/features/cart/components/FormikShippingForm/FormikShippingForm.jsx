@@ -4,7 +4,7 @@ import FormikTextField from '../../../../components/FormikTextField/FormikTextFi
 import FormikSelectField from '../../../../components/FormikSelectField/FormikSelectField';
 import Button from '../../../../components/Button/Button';
 import addressSchema from '../../../../lib/yup/schemas/addressSchema';
-import { UseStepsContext } from '../CheckoutSteps/CheckoutSteps';
+import { UseStepsContext } from '../Stepper/Stepper';
 
 const FormikShippingForm = () => {
 	const { handleNextStep } = UseStepsContext();

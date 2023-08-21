@@ -1,21 +1,11 @@
 import { styled } from 'styled-components';
-import Divider from '../../../../components/Divider/Divider';
 import { createContext, useContext, useState } from 'react';
-import FormikShippingForm from '../FormikShippingForm/FormikShippingForm';
 
 const StepsContext = createContext();
 export const UseStepsContext = () => useContext(StepsContext);
 
-const CheckoutSteps = () => {
+const Stepper = ({ steps }) => {
 	const [currentStep, setCurrentStep] = useState(1);
-	const steps = [
-		{
-			title: 'shipping',
-			context: <FormikShippingForm />,
-		},
-		{ title: 'payment', context: <div>payment</div> },
-		{ title: 'confirmation', context: <div>confirmation</div> },
-	];
 
 	const handleNextStep = () => {
 		setCurrentStep((prev) => {
@@ -26,14 +16,18 @@ const CheckoutSteps = () => {
 		});
 	};
 
+	const isStepActive = (index) => index === currentStep - 1;
+	const isStepCompleted = (index) => index > currentStep - 1;
+
 	return (
-		<StyledCheckoutSteps>
+		<StyledStepper>
 			<div className='stepper'>
 				{steps.map(({ title }, index) => {
 					return (
 						<div
 							key={title}
-							className={`step ${index + 1 === currentStep && 'active'}`}>
+							className={`step ${isStepActive(index) && 'active'} 
+							${isStepCompleted(index) && 'completed'}`}>
 							<p>{index + 1}</p>
 							<p>{title}</p>
 						</div>
@@ -43,16 +37,17 @@ const CheckoutSteps = () => {
 			<StepsContext.Provider value={{ currentStep, handleNextStep }}>
 				<div>{steps[currentStep - 1].context}</div>
 			</StepsContext.Provider>
-		</StyledCheckoutSteps>
+		</StyledStepper>
 	);
 };
 
-const StyledCheckoutSteps = styled.div`
+const StyledStepper = styled.div`
 	.stepper {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
 		align-items: center;
-		/* gap: 1rem; */
+		gap: 1rem;
+		row-gap: 3rem;
+		margin-bottom: 3rem;
 		.step {
 			flex-grow: 1;
 			display: flex;
@@ -66,6 +61,11 @@ const StyledCheckoutSteps = styled.div`
 			opacity: 1;
 		}
 	}
+	@media (min-width: 576px) {
+		.stepper {
+			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		}
+	}
 `;
 
-export default CheckoutSteps;
+export default Stepper;

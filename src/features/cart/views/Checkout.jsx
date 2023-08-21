@@ -1,14 +1,24 @@
 import { styled } from 'styled-components';
 import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
-import CheckoutSteps from '../components/CheckoutSteps/CheckoutSteps';
-// Shipping Info => Address, City, Phone No, Postal Code, Country => Proceed to payment
-// Payment => order summary + (stripe or fake stripe payment)
+import Stepper from '../components/Stepper/Stepper';
+import FormikShippingForm from '../components/FormikShippingForm/FormikShippingForm';
+import CardPaymentForm from '../components/FormikCardPaymentForm/FormikCardPaymentForm';
+import OrderConfimration from '../components/OrderConfirmation/OrderConfimration';
+
+const steps = [
+	{
+		title: 'shipping',
+		context: <FormikShippingForm />,
+	},
+	{ title: 'payment', context: <CardPaymentForm /> },
+	{ title: 'confirmation', context: <OrderConfimration /> },
+];
 
 const Checkout = () => {
 	return (
 		<StyledCheckout>
 			<StyledContentWrapper>
-				<CheckoutSteps />
+				<Stepper steps={steps} />
 			</StyledContentWrapper>
 		</StyledCheckout>
 	);
