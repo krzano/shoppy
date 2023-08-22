@@ -77,20 +77,16 @@ const FormikShippingForm = () => {
 };
 
 const StyledFormikShippingForm = styled.div`
-	padding: 4rem 2rem 6rem;
+	padding: 2rem 2rem 6rem;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	h2 {
-		/* margin-bottom: 2rem; */
-	}
 `;
 
 const StyledFormikForm = styled(Form)`
 	display: grid;
 	gap: 1.2rem;
 	@media (min-width: 576px) {
-		/* padding: 4rem 3rem 6rem; */
 		grid-template-columns: repeat(3, 1fr);
 		align-items: start;
 		.full-width {
