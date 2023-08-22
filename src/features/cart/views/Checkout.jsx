@@ -3,15 +3,32 @@ import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledCon
 import Stepper from '../components/Stepper/Stepper';
 import FormikShippingForm from '../components/FormikShippingForm/FormikShippingForm';
 import CardPaymentForm from '../components/FormikCardPaymentForm/FormikCardPaymentForm';
-import OrderConfimration from '../components/OrderConfirmation/OrderConfimration';
+import OrderConfirmation from '../components/OrderConfirmation/OrderConfirmation';
+import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
 
 const steps = [
 	{
 		title: 'shipping',
 		context: <FormikShippingForm />,
 	},
-	{ title: 'payment', context: <CardPaymentForm /> },
-	{ title: 'confirmation', context: <OrderConfimration /> },
+	{
+		title: 'payment',
+		context: (
+			<>
+				<ScrollToTop />
+				<CardPaymentForm />
+			</>
+		),
+	},
+	{
+		title: 'confirmation',
+		context: (
+			<>
+				<ScrollToTop />
+				<OrderConfirmation />
+			</>
+		),
+	},
 ];
 
 const Checkout = () => {
@@ -25,7 +42,7 @@ const Checkout = () => {
 };
 
 const StyledCheckout = styled.div`
-	padding: 6rem 2rem;
+	padding: 4rem 2rem 6rem;
 	${StyledContentWrapper} {
 		display: flex;
 		flex-direction: column;

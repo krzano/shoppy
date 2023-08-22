@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { formatPrice } from '../../../../utils/helpers';
 
-const OrderConfimration = () => {
+const OrderConfirmation = () => {
 	const { totalPrice, shippingFee, totalAmount } = useSelector(
 		(store) => store.cart
 	);
@@ -15,4 +15,4 @@ const OrderConfimration = () => {
 		</div>
 	);
 };
-export default OrderConfimration;
+export default OrderConfirmation;
