@@ -56,7 +56,7 @@ const cartSlice = createSlice({
 			state.cartItems = newCartItems;
 		},
 		clearCart: (state) => {
-			toast.success('All products removed from your cart');
+			// toast.success('All products removed from your cart');
 			state.cartItems = [];
 		},
 		increaseItemAmount: (state, { payload: id }) => {
