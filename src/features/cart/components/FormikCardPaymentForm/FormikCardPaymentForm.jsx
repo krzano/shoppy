@@ -4,9 +4,29 @@ import FormikTextField from '../../../../components/FormikTextField/FormikTextFi
 import Button from '../../../../components/Button/Button';
 import { UseStepsContext } from '../Stepper/Stepper';
 import cardPaymentSchema from '../../../../lib/yup/schemas/cardPaymentSchema';
+import { formatPrice } from '../../../../utils/helpers';
+import { useSelector } from 'react-redux';
 
 const CardPaymentForm = () => {
 	const { handleNextStep } = UseStepsContext();
+	const { totalPrice, shippingFee } = useSelector((store) => store.cart);
+
+	const handleCardNumberKeyUp = (e) => {
+		let newValue = e.target.value.replaceAll(' ', '');
+		newValue = newValue.replace(/\d{4}(?=.)/g, '$& ');
+		e.target.value = newValue;
+	};
+	const handleExpiryDateKeyUp = (e) => {
+		console.log(e);
+		let newValue = e.target.value.replaceAll(' ', '');
+		if (e.key === 'Backspace' && newValue.endsWith('/')) {
+			newValue = newValue.slice(0, -1);
+		}
+		if (newValue.length === 2 && e.key !== 'Backspace') {
+			newValue = newValue + '/';
+		}
+		e.target.value = newValue;
+	};
 
 	return (
 		<StyledCardPaymentForm>
@@ -14,7 +34,7 @@ const CardPaymentForm = () => {
 			<Formik
 				initialValues={{
 					cardNumber: '',
-					nameOnCard: '',
+					cardHolder: '',
 					expiryDate: '',
 					securityCode: '',
 				}}
@@ -26,32 +46,42 @@ const CardPaymentForm = () => {
 				}}>
 				<StyledFormikForm>
 					<FormikTextField
+						inputMode='numeric'
+						maxLength='19'
 						className='full-width'
 						name='cardNumber'
 						labelText='card number'
 						placeholder='1234 5678 9102 3456'
+						onKeyUp={handleCardNumberKeyUp}
 					/>
 					<FormikTextField
 						className='full-width'
-						name='nameOnCard'
-						labelText='name on card'
+						name='cardHolder'
+						labelText='card holder'
 						placeholder='Eg. John Smith'
 					/>
 					<FormikTextField
+						inputMode='numeric'
+						maxLength='5'
 						className='expiry-date'
 						name='expiryDate'
 						labelText='expiry date'
 						placeholder='MM/YY'
+						onKeyUp={handleExpiryDateKeyUp}
 					/>
 					<FormikTextField
+						inputMode='numeric'
+						maxLength='3'
 						className='security-code'
-						type='password'
 						name='securityCode'
 						labelText='Security code'
 						placeholder='CVV'
 					/>
-					<Button type='submit' className='full-width'>
-						Pay Now
+					<Button
+						type='submit'
+						className='full-width'
+						onClick={() => handleNextStep()}>
+						Pay {formatPrice(totalPrice + shippingFee)}
 					</Button>
 				</StyledFormikForm>
 			</Formik>
@@ -60,7 +90,7 @@ const CardPaymentForm = () => {
 };
 
 const StyledCardPaymentForm = styled.div`
-	padding: 4rem 2rem 6rem;
+	padding: 2rem 2rem 6rem;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;

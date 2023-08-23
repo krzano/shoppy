@@ -5,6 +5,7 @@ import FormikSelectField from '../../../../components/FormikSelectField/FormikSe
 import Button from '../../../../components/Button/Button';
 import addressSchema from '../../../../lib/yup/schemas/addressSchema';
 import { UseStepsContext } from '../Stepper/Stepper';
+import { updateShippingAddressInLocalStorage } from '../../../../utils/localStorage';
 
 const FormikShippingForm = () => {
 	const { handleNextStep } = UseStepsContext();
@@ -27,6 +28,7 @@ const FormikShippingForm = () => {
 					handleNextStep();
 					console.log('submit');
 					console.log(values);
+					updateShippingAddressInLocalStorage(values);
 				}}>
 				<StyledFormikForm>
 					<FormikTextField
