@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Button from '../../../../components/Button/Button';
 import { clearCart } from '../../cartSlice';
 import { getShippingAddressFromLocalStorage } from '../../../../utils/localStorage';
+import { Link } from 'react-router-dom';
 
 const OrderConfirmation = () => {
 	const { totalPrice, shippingFee, totalAmount, cartItems } = useSelector(
@@ -62,7 +63,9 @@ const OrderConfirmation = () => {
 				</p>
 				<p>{country}</p>
 			</div>
-			<Button>Back To Home</Button>
+			<Button as={Link} to='/'>
+				Back To Home
+			</Button>
 		</StyledOrderConfirmation>
 	);
 };
