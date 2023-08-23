@@ -8,6 +8,7 @@ import { getShippingAddressFromLocalStorage } from '../../../../utils/localStora
 import { Link } from 'react-router-dom';
 
 const OrderConfirmation = () => {
+	const dispatch = useDispatch();
 	const { totalPrice, shippingFee, totalAmount, cartItems } = useSelector(
 		(store) => store.cart
 	);
@@ -63,7 +64,12 @@ const OrderConfirmation = () => {
 				</p>
 				<p>{country}</p>
 			</div>
-			<Button as={Link} to='/'>
+			<Button
+				as={Link}
+				to='/'
+				onClick={() => {
+					dispatch(clearCart());
+				}}>
 				Back To Home
 			</Button>
 		</StyledOrderConfirmation>
