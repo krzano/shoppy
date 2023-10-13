@@ -6,9 +6,10 @@ import {
 	filterProducts,
 	searchProducts,
 	sortProducts,
+	updateFilters,
 } from '../../productsSlice';
 import { getUniqueOptions } from '../../../../utils/helpers';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SelectField from '../SelectField/SelectField';
 import SearchField from '../SearchField/SearchField';
 import { useSearchParams } from 'react-router-dom';
@@ -44,16 +45,16 @@ const Filters = () => {
 	const { search, company, category, sortBy } = filters;
 
 	useEffect(() => {
-		// TO FIX NOT WORKING PROPERLY ONLY ONE FILTER UPDATES
-		// for (const [name, value] of searchParams.entries()) {
-		// 	console.log(`${name}: ${value}`);
-		// 	dispatch(filterProducts({ name, value }));
-		// }
 		const searchParamsObject = Object.fromEntries([...searchParams]);
 		Object.keys(searchParamsObject).forEach((key) => {
-			dispatch(filterProducts({ name: key, value: searchParamsObject[key] }));
+			dispatch(updateFilters({ name: key, value: searchParamsObject[key] }));
 		});
-	}, [allProducts]);
+		// TODO? / TO FIX?: filters state in searchParams only and then filtering in Filters component using dispatch() searchProducts, sortProducts, filterProduts functions
+	}, [searchParams]);
+
+	useEffect(() => {
+		dispatch(filterProducts());
+	}, [filters, allProducts]);
 
 	const companies = getUniqueOptions({
 		data: allProducts,
@@ -64,11 +65,6 @@ const Filters = () => {
 		key: 'category',
 	});
 
-	const handleSearchChange = (e) => {
-		const { name, value } = e.target;
-		dispatch(searchProducts(value));
-		// dispatch(filterProducts({ name, value }));
-	};
 	const handleFiltersChange = (e) => {
 		const { name, value } = e.target;
 		setSearchParams((params) => {
@@ -79,51 +75,45 @@ const Filters = () => {
 			}
 			return params;
 		});
-		dispatch(filterProducts({ name, value }));
-	};
-	const handleSortChange = (e) => {
-		const { value } = e.target;
-		dispatch(sortProducts(value));
 	};
 
 	return (
-		<>
-			<StyledFilters>
-				<SearchField
-					id='search'
-					value={search}
-					onChange={handleSearchChange}
-					placeholder='e.g. watch'
-				/>
-				<SelectField
-					name='company'
-					value={company}
-					optionsList={companies}
-					onChange={handleFiltersChange}
-				/>
-				<SelectField
-					name='category'
-					value={category}
-					optionsList={categories}
-					onChange={handleFiltersChange}
-				/>
-				<SelectField
-					$variant='sort'
-					name='sortBy'
-					labelText='Sort By'
-					value={sortBy}
-					optionsList={sortOptions}
-					onChange={handleSortChange}
-				/>
-				<Button
-					$size='small'
-					onClick={() => {
-						dispatch(clearFilters());
-					}}>
-					Clear filters
-				</Button>
-			</StyledFilters>
-		</>
+		<StyledFilters>
+			<SearchField
+				name='search'
+				value={search}
+				onChange={handleFiltersChange}
+				placeholder='e.g. watch'
+			/>
+			<SelectField
+				name='company'
+				value={company}
+				optionsList={companies}
+				onChange={handleFiltersChange}
+			/>
+			<SelectField
+				name='category'
+				value={category}
+				optionsList={categories}
+				onChange={handleFiltersChange}
+			/>
+			<SelectField
+				$variant='sort'
+				name='sortBy'
+				labelText='Sort By'
+				value={sortBy}
+				optionsList={sortOptions}
+				onChange={handleFiltersChange}
+			/>
+			<Button
+				$size='small'
+				onClick={() => {
+					setSearchParams('');
+					dispatch(clearFilters());
+				}}>
+				Clear filters
+			</Button>
+		</StyledFilters>
 	);
 };
 

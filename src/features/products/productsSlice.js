@@ -54,41 +54,28 @@ const productsSlice = createSlice({
 			const { name, value } = payload;
 			state.filters[name] = value;
 		},
-		searchProducts: (state, { payload: search }) => {
-			// TODO TO ASK TO FIX: (probably search has to be put inside filterProducts reducer)
-			let tempProducts = state.allProducts;
-			tempProducts = tempProducts.filter((product) => {
-				return product.name.toLowerCase().includes(search.toLowerCase());
-			});
-			state.filters = { ...state.filters, search };
-			state.filteredProducts = tempProducts;
-		},
-		filterProducts: (state, { payload }) => {
-			const { name, value } = payload;
-			const newFilters = { ...state.filters, [name]: value };
-			let tempProducts = state.allProducts;
-			// Search fix
-			// if (name === 'search' && value !== '') {
-			// 	tempProducts = tempProducts.filter((product) => {
-			// 		return product.name
-			// 			.toLowerCase()
-			// 			.includes(newFilters[key].toLowerCase());
-			// 	});
-			// }
-			// Search fix
-			for (const key in newFilters) {
-				if (key !== 'search' && key !== 'sortBy' && newFilters[key] !== 'all') {
-					console.log(key, newFilters[key]);
-					tempProducts = tempProducts.filter(
-						(product) => product[key] === newFilters[key]
-					);
-				}
+		filterProducts: (state) => {
+			if (state.allProducts.length < 1) return;
+			const {
+				allProducts,
+				filters: { search, category, company, sortBy },
+			} = state;
+			let tempProducts = allProducts;
+			if (search) {
+				tempProducts = tempProducts.filter((product) => {
+					return product.name.toLowerCase().includes(search.toLowerCase());
+				});
 			}
-			state.filters = newFilters;
-			state.filteredProducts = tempProducts;
-		},
-		sortProducts: (state, { payload: sortBy }) => {
-			let tempProducts = state.filteredProducts;
+			if (category !== 'all') {
+				tempProducts = tempProducts.filter((product) => {
+					return product.category === category;
+				});
+			}
+			if (company !== 'all') {
+				tempProducts = tempProducts.filter((product) => {
+					return product.company === company;
+				});
+			}
 			if (sortBy === sortValues.NAME_AZ) {
 				tempProducts = tempProducts.sort((a, b) => {
 					const nameA = a.name.toLowerCase();
@@ -117,7 +104,6 @@ const productsSlice = createSlice({
 					return b.price - a.price;
 				});
 			}
-			state.filters = { ...state.filters, sortBy };
 			state.filteredProducts = tempProducts;
 		},
 	},

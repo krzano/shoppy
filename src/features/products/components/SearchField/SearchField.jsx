@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 
-const FilterField = ({ id, labelText, value, onChange, ...restProps }) => {
+const FilterField = ({ name, labelText, value, onChange, ...restProps }) => {
 	return (
 		<StyledSearchField>
-			<label htmlFor={id}>{labelText || id}</label>
+			<label htmlFor={name}>{labelText || name}</label>
 			<input
-				id={id}
+				id={name}
+				name={name}
 				type='search'
 				value={value}
 				onChange={onChange}
