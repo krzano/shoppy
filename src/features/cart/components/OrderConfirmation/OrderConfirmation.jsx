@@ -35,10 +35,10 @@ const OrderConfirmation = () => {
 				within two minutes, please check your spam folder to see if the email
 				was routed there.
 			</p>
-			<div className='info-box ordered-items'>
-				<h3>Ordered items ({totalAmount})</h3>
+			<StyledInfoBox className='ordered-items'>
+				<h3>Ordered items ({totalAmount}):</h3>
 				<ul>
-					{cartItems.map(({ amount, product }, index) => {
+					{cartItems.map(({ amount, product }) => {
 						const { name, company, price, specs, color, product_id } = product;
 						return (
 							<li key={product_id}>
@@ -52,9 +52,16 @@ const OrderConfirmation = () => {
 						);
 					})}
 				</ul>
-			</div>
-			<div className='info-box shipping-address'>
-				<h3>Shipping address</h3>
+			</StyledInfoBox>
+			<StyledInfoBox>
+				<h3>Total Price: {formatPrice(totalPrice + shippingFee)}</h3>
+				<p>
+					Products: {formatPrice(totalPrice)}
+				</p>
+				<p>Shipping fee: {formatPrice(shippingFee)}</p>
+			</StyledInfoBox>
+			<StyledInfoBox className='shipping-address'>
+				<h3>Shipping address:</h3>
 				<p>
 					{firstName} {lastName}
 				</p>
@@ -63,7 +70,7 @@ const OrderConfirmation = () => {
 					{postalCode} {city}
 				</p>
 				<p>{country}</p>
-			</div>
+			</StyledInfoBox>
 			<Button
 				as={Link}
 				to='/'
@@ -95,14 +102,6 @@ const StyledOrderConfirmation = styled.div`
 		font-size: 1.4rem;
 		color: var(--color-neutral-600);
 	}
-	.info-box {
-		padding: 2rem;
-		border: 1px solid var(--color-neutral-400);
-		text-align: left;
-		h3 {
-			margin-bottom: 1rem;
-		}
-	}
 	.ordered-items {
 		li {
 			padding: 1rem 0;
@@ -124,6 +123,15 @@ const StyledOrderConfirmation = styled.div`
 	}
 	.shipping-address {
 		font-weight: 500;
+	}
+`;
+
+const StyledInfoBox = styled.div`
+	padding: 2rem 2rem 3rem;
+	border: 1px solid var(--color-neutral-400);
+	text-align: left;
+	h3 {
+		margin-bottom: 1rem;
 	}
 `;
 
