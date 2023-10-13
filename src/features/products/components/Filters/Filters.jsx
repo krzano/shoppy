@@ -68,17 +68,21 @@ const Filters = () => {
 	const handleFiltersChange = (e) => {
 		const { name, value } = e.target;
 		setSearchParams((params) => {
-			if (!value) {
+			if (!value && name !== 'search') {
 				params.delete(name);
 			} else {
 				params.set(name, value);
 			}
+			// if (value) {
+			// 	params.set(name, value);
+			// }
 			return params;
 		});
 	};
 
 	return (
 		<StyledFilters>
+			{/* TO FIX: user can't remove last letter when deleteing words from search field. OK AFTER CHANGING handleFiltersChange WORKS */}
 			<SearchField
 				name='search'
 				value={search}
