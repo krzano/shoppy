@@ -19,12 +19,19 @@ const CardPaymentForm = () => {
 	const handleExpiryDateKeyUp = (e) => {
 		console.log(e);
 		let newValue = e.target.value.replaceAll(' ', '');
-		if (e.key === 'Backspace' && newValue.endsWith('/')) {
-			newValue = newValue.slice(0, -1);
-		}
-		if (newValue.length === 2 && e.key !== 'Backspace') {
+
+		if (e.target.value.length === 2) {
 			newValue = newValue + '/';
 		}
+		if (e.target.value.length === 3 && e.target.value.endsWith('/')) {
+			newValue = newValue.replace('/', '');
+		}
+		// if (e.key === 'Backspace' && newValue.endsWith('/')) {
+		// 	newValue = newValue.slice(0, -1);
+		// }
+		// if (newValue.length === 2 && e.key !== 'Backspace') {
+		// 	newValue = newValue + '/';
+		// }
 		e.target.value = newValue;
 	};
 

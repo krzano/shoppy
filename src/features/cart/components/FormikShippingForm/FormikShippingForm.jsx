@@ -61,7 +61,7 @@ const FormikShippingForm = () => {
 						type='tel'
 						name='phoneNumber'
 						labelText='phone number'
-						placeholder='347-418-3434'
+						placeholder='+1 567 890 1234'
 					/>
 					<FormikSelectField
 						name='country'
