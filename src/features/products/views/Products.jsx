@@ -26,9 +26,17 @@ const Products = () => {
 			<StyledContentWrapper>
 				<Filters />
 				<div>
-					<Divider>{filteredProducts.length} Products Found</Divider>
+					<Divider>
+						{filteredProducts.length} Product
+						{filteredProducts.length === 1 ? '' : 's'} Found
+					</Divider>
+					{/* TO CHECK: if this way of error handling is ok */}
 					{filteredProducts.length < 1 ? (
-						<h2>No products filling the requirements.</h2>
+						isError ? (
+							<h2>There was an error... Please try again later.</h2>
+						) : (
+							<h2>Couldn't find any products filling the requirements.</h2>
+						)
 					) : (
 						<div className='products-list'>
 							{filteredProducts.map((product) => {
@@ -52,9 +60,11 @@ const StyledProducts = styled.div`
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2rem;
+		min-height: 80vh;
 	}
 	h2 {
-		margin-bottom: 2rem;
+		margin: 5rem 0;
+		text-align: center;
 	}
 	.products-list {
 		display: grid;

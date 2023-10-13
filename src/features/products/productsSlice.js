@@ -11,7 +11,6 @@ const initialFilters = {
 
 const initialState = {
 	isLoading: false,
-	//TODO: error handling in Products.jsx
 	isError: false,
 	featuredProducts: [],
 	allProducts: [],
