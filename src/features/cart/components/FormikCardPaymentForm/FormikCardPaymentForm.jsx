@@ -13,19 +13,19 @@ const CardPaymentForm = () => {
 
 	const handleCardNumberKeyUp = (e) => {
 		let newValue = e.target.value.replaceAll(' ', '');
+		newValue = newValue.replaceAll(/[a-z]+/gim, '');
 		newValue = newValue.replace(/\d{4}(?=.)/g, '$& ');
 		e.target.value = newValue;
 	};
 	const handleExpiryDateKeyUp = (e) => {
-		console.log(e);
 		let newValue = e.target.value.replaceAll(' ', '');
-
 		if (e.target.value.length === 2) {
 			newValue = newValue + '/';
 		}
 		if (e.target.value.length === 3 && e.target.value.endsWith('/')) {
 			newValue = newValue.replace('/', '');
 		}
+		// console.log(e);
 		// if (e.key === 'Backspace' && newValue.endsWith('/')) {
 		// 	newValue = newValue.slice(0, -1);
 		// }
@@ -84,10 +84,7 @@ const CardPaymentForm = () => {
 						labelText='Security code'
 						placeholder='CVV'
 					/>
-					<Button
-						type='submit'
-						className='full-width'
-						onClick={() => handleNextStep()}>
+					<Button type='submit' className='full-width'>
 						Pay {formatPrice(totalPrice + shippingFee)}
 					</Button>
 				</StyledFormikForm>
