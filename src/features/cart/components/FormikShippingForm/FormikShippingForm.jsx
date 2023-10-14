@@ -50,6 +50,7 @@ const FormikShippingForm = () => {
 						placeholder='e.g. 2860 Tully Street'
 					/>
 					<FormikTextField
+						inputMode='numeric'
 						className='postal-code'
 						name='postalCode'
 						labelText='postal code'
