@@ -49,7 +49,7 @@ const OrderConfirmation = () => {
 						const { name, company, price, specs, color, product_id } = product;
 						return (
 							<li key={product_id}>
-								<p className='amount'>
+								<p className='bold'>
 									{amount}x {formatPrice(price)}
 								</p>
 								<p>
@@ -70,7 +70,7 @@ const OrderConfirmation = () => {
 				<p>
 					{firstName} {lastName}
 				</p>
-				<p>{phoneNumber}</p>
+				<p>tel. {phoneNumber}</p>
 				<p>{street}</p>
 				<p>
 					{postalCode} {city}
@@ -118,17 +118,7 @@ const StyledOrderConfirmation = styled.div`
 			&:last-child {
 				padding-bottom: 0;
 			}
-			p {
-				font-size: 1.6rem;
-				font-weight: 500;
-			}
 		}
-		.amount {
-			font-weight: bold;
-		}
-	}
-	.shipping-address {
-		font-weight: 500;
 	}
 `;
 
@@ -137,7 +127,13 @@ const StyledInfoBox = styled.div`
 	border: 1px solid var(--color-neutral-400);
 	text-align: left;
 	h3 {
+		font-weight: bold;
 		margin-bottom: 1rem;
+	}
+	p {
+		font-size: 1.6rem;
+		font-weight: 500;
+		color: var(--color-primary-900);
 	}
 `;
 
