@@ -4,24 +4,31 @@ import { styled } from 'styled-components';
 import { useEffect } from 'react';
 import Button from '../../../../components/Button/Button';
 import { clearCart } from '../../cartSlice';
-import { getShippingAddressFromLocalStorage } from '../../../../utils/localStorage';
+import {
+	getOrderInfoFromLocalStorage,
+	removeOrderInfoFromLocalStorage,
+} from '../../../../utils/localStorage';
 import { Link } from 'react-router-dom';
 
 const OrderConfirmation = () => {
 	const dispatch = useDispatch();
-	const { totalPrice, shippingFee, totalAmount, cartItems } = useSelector(
-		(store) => store.cart
-	);
 	const { session } = useSelector((store) => store.auth);
 	const {
-		firstName,
-		lastName,
-		phoneNumber,
-		street,
-		postalCode,
-		city,
-		country,
-	} = getShippingAddressFromLocalStorage();
+		cart: { cartItems, totalAmount, totalPrice, shippingFee },
+		shippingAddress: {
+			firstName,
+			lastName,
+			street,
+			postalCode,
+			city,
+			country,
+			phoneNumber,
+		},
+	} = getOrderInfoFromLocalStorage();
+
+	useEffect(() => {
+		dispatch(clearCart());
+	}, []);
 
 	return (
 		<StyledOrderConfirmation>
@@ -55,9 +62,7 @@ const OrderConfirmation = () => {
 			</StyledInfoBox>
 			<StyledInfoBox>
 				<h3>Total Price: {formatPrice(totalPrice + shippingFee)}</h3>
-				<p>
-					Products: {formatPrice(totalPrice)}
-				</p>
+				<p>Products: {formatPrice(totalPrice)}</p>
 				<p>Shipping fee: {formatPrice(shippingFee)}</p>
 			</StyledInfoBox>
 			<StyledInfoBox className='shipping-address'>
@@ -65,6 +70,7 @@ const OrderConfirmation = () => {
 				<p>
 					{firstName} {lastName}
 				</p>
+				<p>{phoneNumber}</p>
 				<p>{street}</p>
 				<p>
 					{postalCode} {city}
@@ -75,7 +81,7 @@ const OrderConfirmation = () => {
 				as={Link}
 				to='/'
 				onClick={() => {
-					dispatch(clearCart());
+					removeOrderInfoFromLocalStorage();
 				}}>
 				Back To Home
 			</Button>

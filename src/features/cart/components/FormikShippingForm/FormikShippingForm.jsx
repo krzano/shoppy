@@ -5,10 +5,14 @@ import FormikSelectField from '../../../../components/FormikSelectField/FormikSe
 import Button from '../../../../components/Button/Button';
 import addressSchema from '../../../../lib/yup/schemas/addressSchema';
 import { UseStepsContext } from '../Stepper/Stepper';
-import { updateShippingAddressInLocalStorage } from '../../../../utils/localStorage';
+import { updateOrderInfoInLocalStorage } from '../../../../utils/localStorage';
+import { useSelector } from 'react-redux';
 
 const FormikShippingForm = () => {
 	const { handleNextStep } = UseStepsContext();
+	const { cartItems, totalAmount, totalPrice, shippingFee } = useSelector(
+		(store) => store.cart
+	);
 
 	return (
 		<StyledFormikShippingForm>
@@ -25,10 +29,11 @@ const FormikShippingForm = () => {
 				}}
 				validationSchema={addressSchema}
 				onSubmit={(values) => {
+					updateOrderInfoInLocalStorage({
+						cart: { cartItems, totalAmount, totalPrice, shippingFee },
+						shippingAddress: values,
+					});
 					handleNextStep();
-					console.log('submit');
-					console.log(values);
-					updateShippingAddressInLocalStorage(values);
 				}}>
 				<StyledFormikForm>
 					<FormikTextField
