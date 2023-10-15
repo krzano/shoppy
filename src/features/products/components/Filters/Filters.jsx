@@ -49,7 +49,6 @@ const Filters = () => {
 		Object.keys(searchParamsObject).forEach((key) => {
 			dispatch(updateFilters({ name: key, value: searchParamsObject[key] }));
 		});
-		// TODO? / TO FIX?: filters state in searchParams only and then filtering in Filters component using dispatch() searchProducts, sortProducts, filterProduts functions
 	}, [searchParams]);
 
 	useEffect(() => {
@@ -73,16 +72,12 @@ const Filters = () => {
 			} else {
 				params.set(name, value);
 			}
-			// if (value) {
-			// 	params.set(name, value);
-			// }
 			return params;
 		});
 	};
 
 	return (
 		<StyledFilters>
-			{/* TO FIX: user can't remove last letter when deleteing words from search field. OK AFTER CHANGING handleFiltersChange WORKS */}
 			<SearchField
 				name='search'
 				value={search}

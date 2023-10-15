@@ -30,7 +30,6 @@ const Products = () => {
 						{filteredProducts.length} Product
 						{filteredProducts.length === 1 ? '' : 's'} Found
 					</Divider>
-					{/* TO CHECK: if this way of error handling is ok */}
 					{filteredProducts.length < 1 ? (
 						isError ? (
 							<h2>There was an error... Please try again later.</h2>
