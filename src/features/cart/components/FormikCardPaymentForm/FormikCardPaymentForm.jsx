@@ -6,9 +6,11 @@ import { UseStepsContext } from '../Stepper/Stepper';
 import cardPaymentSchema from '../../../../lib/yup/schemas/cardPaymentSchema';
 import { formatPrice } from '../../../../utils/helpers';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const CardPaymentForm = () => {
 	const { handleNextStep } = UseStepsContext();
+	const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 	const { totalPrice, shippingFee } = useSelector((store) => store.cart);
 
 	const handleCardNumberKeyUp = (e) => {
@@ -17,7 +19,7 @@ const CardPaymentForm = () => {
 		newValue = newValue.replace(/\d{4}(?=.)/g, '$& ');
 		e.target.value = newValue;
 	};
-	
+
 	const handleExpiryDateKeyUp = (e) => {
 		let newValue = e.target.value.replaceAll(' ', '');
 		if (e.target.value.length === 3 && e.target.value.endsWith('/')) {
@@ -43,10 +45,11 @@ const CardPaymentForm = () => {
 					securityCode: '',
 				}}
 				validationSchema={cardPaymentSchema}
-				onSubmit={(values) => {
-					handleNextStep();
-					console.log('submit');
-					console.log(values);
+				onSubmit={() => {
+					setIsPaymentLoading(true);
+					setTimeout(() => {
+						handleNextStep();
+					}, 2500);
 				}}>
 				<StyledFormikForm>
 					<FormikTextField
@@ -81,7 +84,11 @@ const CardPaymentForm = () => {
 						labelText='Security code'
 						placeholder='CVV'
 					/>
-					<Button type='submit' className='full-width'>
+					<Button
+						type='submit'
+						className='full-width'
+						disabled={isPaymentLoading}
+						isLoading={isPaymentLoading}>
 						Pay {formatPrice(totalPrice + shippingFee)}
 					</Button>
 				</StyledFormikForm>
