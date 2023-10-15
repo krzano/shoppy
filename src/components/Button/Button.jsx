@@ -1,6 +1,23 @@
-import { css, styled } from 'styled-components';
+import { css, styled, keyframes } from 'styled-components';
+
+const Button = ({
+	as,
+	to,
+	$variant = 'primary',
+	$size = 'medium',
+	children,
+	isLoading,
+	...rest
+}) => {
+	return (
+		<StyledButton as={as} to={to} $variant={$variant} $size={$size} {...rest}>
+			{isLoading && <ButtonLoadingSpinner />} {children}
+		</StyledButton>
+	);
+};
 
 const StyledButton = styled.button`
+	position: relative;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -13,6 +30,7 @@ const StyledButton = styled.button`
 	border: 1px solid var(--color-primary-900);
 	cursor: pointer;
 	text-decoration: none;
+	overflow: hidden;
 	svg {
 		font-size: 1.5em;
 	}
@@ -44,7 +62,7 @@ const StyledButton = styled.button`
 				color: var(--color-neutral-0);
 				background-color: var(--color-primary-900);
 				transition: background-color 0.3s;
-				&:hover {
+				&:hover:not(:disabled) {
 					background-color: var(--color-primary-700);
 				}
 			`;
@@ -54,7 +72,7 @@ const StyledButton = styled.button`
 				color: var(--color-primary-900);
 				background-color: var(--color-neutral-0);
 				transition: background-color 0.3s;
-				&:hover {
+				&:hover:not(:disabled) {
 					background-color: var(--color-primary-100);
 				}
 			`;
@@ -65,7 +83,7 @@ const StyledButton = styled.button`
 				border-color: var(--color-red-700);
 				background-color: var(--color-neutral-0);
 				transition: background-color 0.3s;
-				&:hover {
+				&:hover:not(:disabled) {
 					background-color: var(--color-red-100);
 				}
 			`;
@@ -77,27 +95,69 @@ const StyledButton = styled.button`
 				background: none;
 				padding: 0 0.7rem;
 				color: var(--color-primary-700);
-				&:hover {
+				&:hover:not(:disabled) {
 					color: var(--color-primary-500);
 					text-decoration: underline;
 				}
 			`;
 		}
 	}}
+	&:disabled {
+		opacity: 0.7;
+		cursor: not-allowed;
+	}
 `;
 
-const Button = ({
-	as,
-	to,
-	$variant = 'primary',
-	$size = 'medium',
-	children,
-	...rest
-}) => {
+// TO ASK TO CHECK: if I should create a new component file for the ButtonLoadingSpinner
+export const ButtonLoadingSpinner = () => {
 	return (
-		<StyledButton as={as} to={to} $variant={$variant} $size={$size} {...rest}>
-			{children}
-		</StyledButton>
+		<StyledButtonLoadingSpinner>
+			<div className='spinner'></div>
+		</StyledButtonLoadingSpinner>
 	);
 };
+
+const rotate = keyframes`
+  0%{
+    rotate: 0deg;
+    opacity:1;
+  }
+  50%{
+    opacity:0.8;
+  }
+  100%{
+    rotate: 360deg;
+    opacity:1;
+  }
+`;
+
+const showSpinner = keyframes`
+	0%{
+		opacity:0
+		} 
+	100%{
+		opacity:1
+		}
+`;
+
+const StyledButtonLoadingSpinner = styled.div`
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(1px);
+	animation: ${showSpinner} 0.6s linear forwards;
+	.spinner {
+		width: 1.5em;
+		height: 1.5em;
+		border: 5px solid var(--color-primary-900);
+		border-top: 5px solid transparent;
+		border-radius: 50%;
+		animation: ${rotate} 1s cubic-bezier(0.68, 0.42, 0.34, 0.94) infinite;
+	}
+`;
+
 export default Button;
