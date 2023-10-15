@@ -9,7 +9,12 @@ import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
 const steps = [
 	{
 		title: 'shipping',
-		context: <FormikShippingForm />,
+		context: (
+			<>
+				<ScrollToTop />
+				<FormikShippingForm />
+			</>
+		),
 	},
 	{
 		title: 'payment',
@@ -49,6 +54,11 @@ const StyledCheckout = styled.div`
 		justify-content: center;
 		align-items: stretch;
 		max-width: 50rem;
+		/* TO ASK TO CHECK: if its better to style it in each seperate component displayed in stepper */
+		button,
+		a {
+			margin-top: 2rem;
+		}
 	}
 `;
 
