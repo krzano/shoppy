@@ -25,6 +25,7 @@ const OrderConfirmation = () => {
 			phoneNumber,
 		},
 	} = getOrderInfoFromLocalStorage();
+	const orderNumber = Date.now();
 
 	useEffect(() => {
 		dispatch(clearCart());
@@ -34,7 +35,7 @@ const OrderConfirmation = () => {
 		<StyledOrderConfirmation>
 			<h2>Thank you!</h2>
 			<h3>
-				Your order <span className='bold'>#{Date.now()}</span> has been placed!
+				Your order <span className='bold'>#{orderNumber}</span> has been placed!
 			</h3>
 			<p className='email-info'>
 				We sent an email to <span className='bold'>{session?.user?.email}</span>{' '}
@@ -52,8 +53,9 @@ const OrderConfirmation = () => {
 								<p className='bold'>
 									{amount}x {formatPrice(price)}
 								</p>
-								<p>
-									{name} {specs && specs + ','} {color}
+								<p className='product-name'>{name} </p>
+								<p className='product-details'>
+									{company} | {specs && specs + ','} {color}
 								</p>
 							</li>
 						);
@@ -119,6 +121,12 @@ const StyledOrderConfirmation = styled.div`
 				padding-bottom: 0;
 			}
 		}
+	}
+	.product-details {
+		font-weight: normal;
+	}
+	.product-name {
+		font-weight: 500;
 	}
 `;
 
