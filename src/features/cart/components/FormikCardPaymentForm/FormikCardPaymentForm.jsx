@@ -60,12 +60,14 @@ const CardPaymentForm = () => {
 						labelText='card number'
 						placeholder='1234 5678 9102 3456'
 						onKeyUp={handleCardNumberKeyUp}
+						disabled={isPaymentLoading}
 					/>
 					<FormikTextField
 						className='full-width'
 						name='cardHolder'
 						labelText='card holder'
 						placeholder='Eg. John Smith'
+						disabled={isPaymentLoading}
 					/>
 					<FormikTextField
 						inputMode='numeric'
@@ -75,6 +77,7 @@ const CardPaymentForm = () => {
 						labelText='expiry date'
 						placeholder='MM/YY'
 						onKeyUp={handleExpiryDateKeyUp}
+						disabled={isPaymentLoading}
 					/>
 					<FormikTextField
 						inputMode='numeric'
@@ -83,6 +86,7 @@ const CardPaymentForm = () => {
 						name='securityCode'
 						labelText='Security code'
 						placeholder='CVV'
+						disabled={isPaymentLoading}
 					/>
 					<Button
 						type='submit'
