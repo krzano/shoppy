@@ -5,13 +5,15 @@ import Button from '../../../../components/Button/Button';
 import { UseStepsContext } from '../Stepper/Stepper';
 import cardPaymentSchema from '../../../../lib/yup/schemas/cardPaymentSchema';
 import { formatPrice } from '../../../../utils/helpers';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { getOrderInfoFromLocalStorage } from '../../../../utils/localStorage';
 
 const CardPaymentForm = () => {
 	const { handleNextStep } = UseStepsContext();
 	const [isPaymentLoading, setIsPaymentLoading] = useState(false);
-	const { totalPrice, shippingFee } = useSelector((store) => store.cart);
+	const {
+		cart: { totalPrice, shippingFee },
+	} = getOrderInfoFromLocalStorage();
 
 	const handleCardNumberKeyUp = (e) => {
 		let newValue = e.target.value.replaceAll(' ', '');
