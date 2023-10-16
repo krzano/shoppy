@@ -32,6 +32,7 @@ const FormikShippingForm = () => {
 					updateOrderInfoInLocalStorage({
 						cart: { cartItems, totalAmount, totalPrice, shippingFee },
 						shippingAddress: values,
+						orderNumber: Date.now(),
 					});
 					handleNextStep();
 				}}>
@@ -74,6 +75,7 @@ const FormikShippingForm = () => {
 						labelText='Country/Region'
 						className='full-width'>
 						<option value='US'>United States</option>
+						<option value='PL'>Poland</option>
 					</FormikSelectField>
 					<Button type='submit' className='full-width' $variant='secondary'>
 						Save Address

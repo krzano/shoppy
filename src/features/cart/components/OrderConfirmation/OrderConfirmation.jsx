@@ -24,8 +24,8 @@ const OrderConfirmation = () => {
 			country,
 			phoneNumber,
 		},
+		orderNumber,
 	} = getOrderInfoFromLocalStorage();
-	const orderNumber = Date.now();
 
 	useEffect(() => {
 		dispatch(clearCart());
@@ -65,7 +65,7 @@ const OrderConfirmation = () => {
 			<StyledInfoBox>
 				<h3>Total Price: {formatPrice(totalPrice + shippingFee)}</h3>
 				<p>Products: {formatPrice(totalPrice)}</p>
-				<p>Shipping fee: {formatPrice(shippingFee)}</p>
+				<p>Shipping: {formatPrice(shippingFee)}</p>
 			</StyledInfoBox>
 			<StyledInfoBox className='shipping-address'>
 				<h3>Shipping address:</h3>
