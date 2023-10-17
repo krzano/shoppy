@@ -9,7 +9,7 @@ import categoryLaptopsImg from '../../assets/images/category-laptops.jpg';
 import categoryMobilePhonesImg from '../../assets/images/category-mobile-phones.jpg';
 import categoryTabletsImg from '../../assets/images/category-tablets.jpg';
 import categoryAccesoriesImg from '../../assets/images/category-accesories.jpg';
-import SwiperCarousel from './SwiperCarousel/SwiperCarousel';
+import SwiperCarousel from './FeaturedProducts/FeaturedProducts';
 
 const featuredCategories = [
 	{
@@ -55,10 +55,10 @@ const Home = () => {
 					</Button>
 				</StyledContentWrapper>
 			</StyledHeader>
-			<Section title='Featured products'>
+			<Section title='Our bestsellers'>
 				<SwiperCarousel />
 			</Section>
-			<Section title='Browse our top categories'>
+			<Section title='Shop our top categories'>
 				<CardsContainer>
 					{featuredCategories.map(({ id, text, path, $backgroundImg }) => {
 						return (

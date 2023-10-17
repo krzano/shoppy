@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
 
 const StyledSection = styled.section`
-	padding: 8rem 4rem 10rem;
+	padding: 6rem 2rem 8rem;
 	overflow-x: hidden;
 	h2 {
 		margin-bottom: 1em;
