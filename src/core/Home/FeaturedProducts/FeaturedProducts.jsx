@@ -25,7 +25,6 @@ import { Link } from 'react-router-dom';
 
 const FeaturedProducts = () => {
 	const dispatch = useDispatch();
-	const swiper = useSwiper();
 	const { isLoading, isError, featuredProducts } = useSelector(
 		(store) => store.products
 	);
@@ -34,16 +33,18 @@ const FeaturedProducts = () => {
 		dispatch(getFeaturedProducts());
 	}, []);
 
-	// useEffect(() => {
-	// 	if (featuredProducts.length > 1) {
-	// 		swiper.slideNext();
-	// 	}
-	// }, [featuredProducts]);
-
 	return (
 		<StyledFeaturedProducts>
-			{isError || isLoading ? (
-				<LoadingSpinner />
+			{isLoading ? (
+				isError ? (
+					<p className='error'>
+						There was an error when downloading the products list.
+						<br />
+						Please try again later...
+					</p>
+				) : (
+					<LoadingSpinner />
+				)
 			) : (
 				<StyledSwiperCarousel>
 					<Swiper
@@ -89,6 +90,12 @@ const StyledFeaturedProducts = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 2rem;
+	.error {
+		text-align: center;
+		padding: 2rem 4rem;
+		border-radius: var(--border-radius-lg);
+		border: 1px solid var(--color-neutral-300);
+	}
 `;
 
 const StyledSwiperCarousel = styled.div`
