@@ -76,7 +76,7 @@ const FeaturedProducts = () => {
 				</Swiper>
 				<div className='pagination'></div>
 			</StyledSwiperCarousel>
-			<Button as={Link} to='/products' $variant='secondary'>
+			<Button as={Link} to='/products'>
 				All Products
 			</Button>
 		</StyledFeaturedProducts>
@@ -88,7 +88,7 @@ const StyledFeaturedProducts = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 1rem;
+	gap: 2rem;
 `;
 
 const StyledSwiperCarousel = styled.div`
