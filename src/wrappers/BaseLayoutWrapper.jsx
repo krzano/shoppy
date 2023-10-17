@@ -64,23 +64,28 @@ const footerLinksList = [
 		links: [
 			{
 				id: 0,
-				path: '/',
-				label: 'Smartphones',
+				path: '/products?category=mobile phones',
+				label: 'Mobile Phones',
 			},
 			{
 				id: 1,
-				path: '/',
+				path: '/products?category=tablets',
 				label: 'Tablets',
 			},
 			{
 				id: 2,
-				path: '/',
-				label: 'Notebooks',
+				path: '/products?category=laptops',
+				label: 'Laptops',
 			},
 			{
 				id: 3,
-				path: '/',
+				path: '/products?category=accessories',
 				label: 'Accesories',
+			},
+			{
+				id: 4,
+				path: '/products',
+				label: 'All Products',
 			},
 		],
 	},
