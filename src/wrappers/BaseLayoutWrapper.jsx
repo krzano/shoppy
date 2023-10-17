@@ -113,31 +113,26 @@ const footerLinksList = [
 				path: '/',
 				label: 'Gift Cards',
 			},
-			{
-				id: 5,
-				path: '/',
-				label: 'Contact Us',
-			},
 		],
 	},
 	{
 		id: 2,
-		title: 'Third Title',
+		title: 'About Us',
 		links: [
 			{
 				id: 0,
 				path: '/',
-				label: 'Link',
+				label: 'Our History',
 			},
 			{
 				id: 1,
 				path: '/',
-				label: 'Random',
+				label: 'Partners',
 			},
 			{
 				id: 2,
 				path: '/',
-				label: 'Default',
+				label: 'Contact Us',
 			},
 		],
 	},
