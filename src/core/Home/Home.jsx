@@ -78,6 +78,7 @@ const Home = () => {
 
 const StyledHeader = styled.header`
 	display: grid;
+	margin-bottom: 2rem;
 	padding: 8rem 4rem;
 	background-color: var(--color-neutral-0);
 	background-image: linear-gradient(
