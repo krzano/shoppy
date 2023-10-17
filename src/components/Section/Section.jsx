@@ -1,16 +1,17 @@
 import { styled } from 'styled-components';
-import StyledContentWrapper from '../../../styles/StyledContentWrapper/StyledContentWrapper';
+import StyledContentWrapper from '../../styles/StyledContentWrapper/StyledContentWrapper';
+StyledContentWrapper;
 
 const StyledSection = styled.section`
 	padding: 6rem 2rem 6rem;
 	overflow-x: hidden;
-	h2 {
+	.title {
 		margin-bottom: 1em;
 		color: var(--color-neutral-700);
 	}
 	@media (min-width: 576px) {
 		padding: 8rem 4rem 8rem;
-		h2 {
+		.title {
 			font-size: 3rem;
 		}
 	}
@@ -20,7 +21,7 @@ const Section = ({ title, children }) => {
 	return (
 		<StyledSection>
 			<StyledContentWrapper>
-				<h2>{title}</h2>
+				{title && <h2 className='title'>{title}</h2>}
 				{children}
 			</StyledContentWrapper>
 		</StyledSection>
