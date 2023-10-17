@@ -42,40 +42,40 @@ const FeaturedProducts = () => {
 
 	return (
 		<StyledFeaturedProducts>
-			<StyledSwiperCarousel>
-				<Swiper
-					modules={[Navigation, Pagination, Autoplay]}
-					grabCursor={true}
-					pagination={true}
-					autoplay={{ delay: 3000, disableOnInteraction: false }}
-					speed={1000}
-					loop={true}
-					spaceBetween={20}
-					slidesPerView={1}
-					breakpoints={{
-						768: {
-							slidesPerView: 2,
-							spaceBetween: 40,
-						},
-						992: {
-							slidesPerView: 3,
-							spaceBetween: 20,
-						},
-					}}>
-					{isError || isLoading ? (
-						<LoadingSpinner />
-					) : (
-						featuredProducts.map((product) => {
+			{isError || isLoading ? (
+				<LoadingSpinner />
+			) : (
+				<StyledSwiperCarousel>
+					<Swiper
+						modules={[Navigation, Pagination, Autoplay]}
+						grabCursor={true}
+						pagination={true}
+						autoplay={{ delay: 3000, disableOnInteraction: false }}
+						speed={1000}
+						loop={true}
+						spaceBetween={20}
+						slidesPerView={1}
+						breakpoints={{
+							768: {
+								slidesPerView: 2,
+								spaceBetween: 40,
+							},
+							992: {
+								slidesPerView: 3,
+								spaceBetween: 20,
+							},
+						}}>
+						{featuredProducts.map((product) => {
 							return (
 								<SwiperSlide key={product.product_id}>
 									<ProductCard product={product} />
 								</SwiperSlide>
 							);
-						})
-					)}
-				</Swiper>
-				<div className='pagination'></div>
-			</StyledSwiperCarousel>
+						})}
+					</Swiper>
+					<div className='pagination'></div>
+				</StyledSwiperCarousel>
+			)}
 			<Button as={Link} to='/products'>
 				All Products
 			</Button>
