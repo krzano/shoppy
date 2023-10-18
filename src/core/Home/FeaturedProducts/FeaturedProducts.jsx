@@ -89,7 +89,7 @@ const StyledFeaturedProducts = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 2rem;
+	/* gap: 1rem; */
 	.error {
 		text-align: center;
 		padding: 2rem 4rem;
@@ -104,11 +104,21 @@ const StyledSwiperCarousel = styled.div`
 		background: var(--color-primary-700);
 	}
 	.swiper {
-		padding-bottom: 4rem;
+		padding-bottom: 3rem;
 	}
 	.swiper-slide {
 		border-radius: var(--border-radius-lg);
 		border: 1px solid var(--color-primary-300);
+	}
+	/* .swiper-pagination-bullets {
+		bottom: 95%;
+	} */
+	.swiper-pagination-bullet {
+		/* height: 4px;
+		width: 4px; */
+		height: 2px;
+		width: 8px;
+		border-radius: 0px;
 	}
 `;
 
