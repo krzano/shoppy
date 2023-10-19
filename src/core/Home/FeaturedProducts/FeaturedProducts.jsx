@@ -100,9 +100,6 @@ const StyledFeaturedProducts = styled.div`
 
 const StyledSwiperCarousel = styled.div`
 	width: 100%;
-	.swiper-pagination-bullet-active {
-		background: var(--color-primary-700);
-	}
 	.swiper {
 		padding-bottom: 3rem;
 	}
@@ -120,8 +117,11 @@ const StyledSwiperCarousel = styled.div`
 		height: 2px;
 		width: 100%;
 		border-radius: 0px;
-		border-radius: var(--border-radius-lg);
 		margin: 0 !important;
+	}
+	.swiper-pagination-bullet-active {
+		background: var(--color-primary-700);
+		border-radius: var(--border-radius-lg);
 	}
 `;
 
