@@ -89,7 +89,7 @@ const StyledFeaturedProducts = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* gap: 1rem; */
+	gap: 1.6rem;
 	.error {
 		text-align: center;
 		padding: 2rem 4rem;
@@ -108,17 +108,20 @@ const StyledSwiperCarousel = styled.div`
 	}
 	.swiper-slide {
 		border-radius: var(--border-radius-lg);
-		border: 1px solid var(--color-primary-300);
+		border: 1px solid var(--color-primary-100);
 	}
-	/* .swiper-pagination-bullets {
-		bottom: 95%;
-	} */
+	.swiper-pagination {
+		display: flex;
+		opacity: 0.5;
+		border-radius: var(--border-radius-lg);
+		overflow: hidden;
+	}
 	.swiper-pagination-bullet {
-		/* height: 4px;
-		width: 4px; */
 		height: 2px;
-		width: 8px;
+		width: 100%;
 		border-radius: 0px;
+		border-radius: var(--border-radius-lg);
+		margin: 0 !important;
 	}
 `;
 
