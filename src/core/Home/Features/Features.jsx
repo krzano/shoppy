@@ -18,7 +18,6 @@ const StyledFeatures = styled.div`
 	justify-content: center;
 	align-items: stretch;
 	gap: 6rem 3rem;
-	padding-top: 2rem;
 `;
 
 export default Features;
