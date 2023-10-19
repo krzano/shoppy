@@ -110,10 +110,8 @@ const Home = () => {
 				</CardsContainer>
 			</Section>
 			<StyledNewsletterBackground>
-				<Section title='Subscribe to newsletter'>
-					<p>Newsletter</p>
-					<p>Name, email, subscribe button</p>
-					{/* <Newsletter /> */}
+				<Section>
+					<Newsletter />
 				</Section>
 			</StyledNewsletterBackground>
 		</>
