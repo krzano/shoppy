@@ -38,7 +38,9 @@ const ProductCard = ({ product }) => {
 				<span className='company'>{company}</span>
 				{` ${specs || color}`}
 			</p>
-			<RatingStars rating={rating} reviews={reviews} />
+			<div className='stars-container'>
+				<RatingStars rating={rating} reviews={reviews} />
+			</div>
 			<div className='button-container'>
 				<Button
 					className='button'
@@ -128,11 +130,14 @@ const StyledProductCard = styled.article`
 		border-right: 1px solid var(--color-neutral-300);
 		color: var(--color-neutral-500);
 	}
-	.button-container {
+	.stars-container {
 		flex-grow: 1;
+	}
+	.button-container {
 		display: flex;
+		column-gap: 0.6rem;
 		justify-content: space-between;
-		align-items: flex-end;
+		align-items: stretch;
 	}
 `;
 
