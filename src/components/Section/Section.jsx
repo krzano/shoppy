@@ -6,7 +6,7 @@ const StyledSection = styled.section`
 	padding: 6rem 2rem 6rem;
 	overflow-x: hidden;
 	.title {
-		margin-bottom: 1em;
+		margin-bottom: 1.6em;
 		color: var(--color-neutral-700);
 	}
 	@media (min-width: 576px) {
