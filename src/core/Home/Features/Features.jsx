@@ -21,3 +21,8 @@ const StyledFeatures = styled.div`
 `;
 
 export default Features;
+
+export const StyledFeaturesBackground = styled.div`
+	background-color: var(--color-primary-900);
+	/* box-shadow: 0px 0px 50px -20px rgb(0, 0, 0, 0.6); */
+`;

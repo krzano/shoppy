@@ -14,21 +14,20 @@ const StyledFeature = styled.article`
 	flex-direction: column;
 	align-items: center;
 	gap: 2rem;
-	padding: 3rem 2rem 3rem;
+	padding: 2.6rem 3rem 3rem;
 	min-height: 20rem;
 	width: 100%;
 	max-width: 33rem;
+	background-color: var(--color-primary-800);
+	box-shadow: var(--shadow-md);
 	text-align: center;
-	border: 1px solid transparent;
-	border-bottom: 4px solid var(--color-neutral-200);
-	transition: border-color 0.6s, border-radius 0.6s;
-	&:hover {
-		border-color: var(--color-primary-200);
-		border-radius: var(--border-radius-lg);
-	}
+	color: var(--color-neutral-0);
+	border-radius: var(--border-radius-sm);
+	border: 1px solid var(--color-primary-300);
+	border-bottom: 3px solid var(--color-primary-50);
+	transition: background-color 0.6s;
 	svg {
 		font-size: 5rem;
-		color: var(--color-neutral-700);
 	}
 	p {
 		display: grid;

@@ -9,14 +9,15 @@ import categoryLaptopsImg from '../../assets/images/category-laptops.jpg';
 import categoryMobilePhonesImg from '../../assets/images/category-mobile-phones.jpg';
 import categoryTabletsImg from '../../assets/images/category-tablets.jpg';
 import categoryAccesoriesImg from '../../assets/images/category-accesories.jpg';
-import SwiperCarousel from './FeaturedProducts/FeaturedProducts';
+import FeaturedProducts from './FeaturedProducts/FeaturedProducts';
 import { formatPrice } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
-import Features from './Features/Features';
-// import Newsletter from './Newsletter/Newsletter';
-import { FaRegCreditCard } from 'react-icons/fa6';
-import { BiSupport } from 'react-icons/bi';
-import { TbTruckDelivery } from 'react-icons/tb';
+import Features, { StyledFeaturesBackground } from './Features/Features';
+import { PiHeadsetLight } from 'react-icons/pi';
+import { CiDeliveryTruck, CiCreditCard1 } from 'react-icons/ci';
+import Newsletter, {
+	StyledNewsletterBackground,
+} from './Newsletter/Newsletter';
 
 const featuredCategories = [
 	{
@@ -51,20 +52,20 @@ const Home = () => {
 	const featuresList = [
 		{
 			id: 0,
-			icon: <BiSupport />,
+			icon: <PiHeadsetLight />,
 			text: '24/7 customer support and extended warranty for all products',
 		},
 		{
 			id: 1,
-			icon: <TbTruckDelivery />,
+			icon: <CiDeliveryTruck />,
 			text: `Free delivery on all orders over ${formatPrice(
 				freeShippingOnOrdersOver
-			)}`,
+			)} and free 30-day order returns`,
 		},
 		{
 			id: 2,
-			icon: <FaRegCreditCard />,
-			text: 'We accept Mastercard and Visa card payments',
+			icon: <CiCreditCard1 />,
+			text: `We accept Mastercard${'\u00AE'} and Visa${'\u00AE'} card payments`,
 		},
 	];
 
@@ -85,11 +86,15 @@ const Home = () => {
 				</StyledContentWrapper>
 			</StyledHeader>
 			<Section title='Our bestsellers'>
-				<SwiperCarousel />
+				<FeaturedProducts />
 			</Section>
-			<Section title='The #1 retailer in the US and Europe'>
-				<Features featuresList={featuresList} />
-			</Section>
+			<StyledFeaturesBackground>
+				<Section
+					title='The #1 retailer in the US and Europe'
+					$textColorVariant='light'>
+					<Features featuresList={featuresList} />
+				</Section>
+			</StyledFeaturesBackground>
 			<Section title='Shop our top categories'>
 				<CardsContainer>
 					{featuredCategories.map(({ id, text, path, $backgroundImg }) => {
@@ -104,11 +109,13 @@ const Home = () => {
 					})}
 				</CardsContainer>
 			</Section>
-			<Section>
-				<p>Newsletter</p>
-				<p>Name, email, subscribe button</p>
-				{/* <Newsletter /> */}
-			</Section>
+			<StyledNewsletterBackground>
+				<Section title='Subscribe to newsletter'>
+					<p>Newsletter</p>
+					<p>Name, email, subscribe button</p>
+					{/* <Newsletter /> */}
+				</Section>
+			</StyledNewsletterBackground>
 		</>
 	);
 };
