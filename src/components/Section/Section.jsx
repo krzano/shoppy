@@ -1,25 +1,10 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 import StyledContentWrapper from '../../styles/StyledContentWrapper/StyledContentWrapper';
 StyledContentWrapper;
 
-const StyledSection = styled.section`
-	padding: 6rem 2rem 6rem;
-	overflow-x: hidden;
-	.title {
-		margin-bottom: 1.6em;
-		color: var(--color-neutral-700);
-	}
-	@media (min-width: 576px) {
-		padding: 8rem 4rem 8rem;
-		.title {
-			font-size: 3rem;
-		}
-	}
-`;
-
-const Section = ({ title, children }) => {
+const Section = ({ title, children, $textColorVariant = 'dark' }) => {
 	return (
-		<StyledSection>
+		<StyledSection $textColorVariant={$textColorVariant}>
 			<StyledContentWrapper>
 				{title && <h2 className='title'>{title}</h2>}
 				{children}
@@ -27,4 +12,32 @@ const Section = ({ title, children }) => {
 		</StyledSection>
 	);
 };
+
+const StyledSection = styled.section`
+	padding: 6rem 2rem 6rem;
+	overflow-x: hidden;
+	color: var(--color-neutral-700);
+	${({ $textColorVariant }) => {
+		if ($textColorVariant === 'light') {
+			return css`
+				color: var(--color-neutral-100);
+			`;
+		}
+		if ($textColorVariant === 'dark') {
+			return css`
+				color: var(--color-neutral-700);
+			`;
+		}
+	}}
+	.title {
+		margin-bottom: 1.6em;
+	}
+	@media (min-width: 576px) {
+		padding: 6rem 4rem 8rem;
+		.title {
+			font-size: 3rem;
+		}
+	}
+`;
+
 export default Section;
