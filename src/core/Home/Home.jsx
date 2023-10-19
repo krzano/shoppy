@@ -10,7 +10,13 @@ import categoryMobilePhonesImg from '../../assets/images/category-mobile-phones.
 import categoryTabletsImg from '../../assets/images/category-tablets.jpg';
 import categoryAccesoriesImg from '../../assets/images/category-accesories.jpg';
 import SwiperCarousel from './FeaturedProducts/FeaturedProducts';
+import { formatPrice } from '../../utils/helpers';
+import { useSelector } from 'react-redux';
+import Features from './Features/Features';
 // import Newsletter from './Newsletter/Newsletter';
+import { FaRegCreditCard } from 'react-icons/fa6';
+import { BiSupport } from 'react-icons/bi';
+import { TbTruckDelivery } from 'react-icons/tb';
 
 const featuredCategories = [
 	{
@@ -40,6 +46,28 @@ const featuredCategories = [
 ];
 
 const Home = () => {
+	const { freeShippingOnOrdersOver } = useSelector((store) => store.cart);
+
+	const featuresList = [
+		{
+			id: 0,
+			icon: <BiSupport />,
+			text: '24/7 customer support and extended warranty for all products',
+		},
+		{
+			id: 1,
+			icon: <TbTruckDelivery />,
+			text: `Free delivery on all orders over ${formatPrice(
+				freeShippingOnOrdersOver
+			)}`,
+		},
+		{
+			id: 2,
+			icon: <FaRegCreditCard />,
+			text: 'We accept Mastercard and Visa card payments',
+		},
+	];
+
 	return (
 		<>
 			<StyledHeader>
@@ -59,7 +87,9 @@ const Home = () => {
 			<Section title='Our bestsellers'>
 				<SwiperCarousel />
 			</Section>
-			<Section>{/* <Newsletter /> */}</Section>
+			<Section title='The #1 retailer in the US and Europe'>
+				<Features featuresList={featuresList} />
+			</Section>
 			<Section title='Shop our top categories'>
 				<CardsContainer>
 					{featuredCategories.map(({ id, text, path, $backgroundImg }) => {
@@ -73,6 +103,11 @@ const Home = () => {
 						);
 					})}
 				</CardsContainer>
+			</Section>
+			<Section>
+				<p>Newsletter</p>
+				<p>Name, email, subscribe button</p>
+				{/* <Newsletter /> */}
 			</Section>
 		</>
 	);
