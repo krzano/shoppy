@@ -1,13 +1,20 @@
 import { useField } from 'formik';
 import { styled } from 'styled-components';
 
-const FormikTextField = ({ labelText, className, ...props }) => {
+const FormikTextField = ({
+	showLabel = true,
+	labelText,
+	className,
+	...props
+}) => {
 	const [field, meta, helpers] = useField(props);
 
 	return (
 		<StyledFormikTextField
 			className={`${className}  ${meta.touched && meta.error && 'error'}`}>
-			<label htmlFor={field.name}>{labelText || field.name}</label>
+			{showLabel && (
+				<label htmlFor={field.name}>{labelText || field.name}</label>
+			)}
 			<input id={field.name} {...field} {...props} />
 			<p className='error-text'>{meta.touched && meta.error}</p>
 		</StyledFormikTextField>
