@@ -3,7 +3,7 @@ import ourstoryImgSmall from '../../assets/images/about-ourstory-small.jpg';
 import ourstoryImgBig from '../../assets/images/about-ourstory-big.jpg';
 import styled from 'styled-components';
 import FrequentlyAskedQuestions from './FrequentlyAskedQuestions/FrequentlyAskedQuestions';
-import ContactUs from './ContactUs/Contactus';
+import ContactUs from './ContactUs/ContactUs';
 
 const faqList = [
 	{
@@ -58,7 +58,7 @@ const contactInfo = [
 		},
 	},
 ];
-// plac Europejski 1, 00-844 Warszawa
+
 const About = () => {
 	return (
 		<>

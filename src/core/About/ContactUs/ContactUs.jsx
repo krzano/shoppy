@@ -69,6 +69,7 @@ const StyledContactBox = styled.address`
 		font-size: 3rem;
 		color: var(--color-primary-800);
 	}
+
 	.info-row,
 	.address {
 		display: flex;
