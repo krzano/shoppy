@@ -3,6 +3,7 @@ import ourstoryImgSmall from '../../assets/images/about-ourstory-small.jpg';
 import ourstoryImgBig from '../../assets/images/about-ourstory-big.jpg';
 import styled from 'styled-components';
 import FrequentlyAskedQuestions from './FrequentlyAskedQuestions/FrequentlyAskedQuestions';
+import ContactUs from './ContactUs/Contactus';
 
 const faqList = [
 	{
@@ -31,12 +32,33 @@ const faqList = [
 	},
 ];
 
-const contactInfo = {
-	phoneNumber: '+189890890809',
-	email: 'contact@shoppy.com',
-	location: '123 Sample Street',
-};
-
+const contactInfo = [
+	{
+		id: 0,
+		region: 'North America',
+		phoneNumber: '+1 630 231-0843',
+		email: 'contact@shoppy.com',
+		address: {
+			street: '337 Parkside Ave',
+			city: 'Chicago',
+			postalCode: 'IL 60185',
+			country: 'USA',
+		},
+	},
+	{
+		id: 1,
+		region: 'Europe',
+		phoneNumber: '+48 22 11-41-337',
+		email: 'contact@shoppy.pl',
+		address: {
+			street: 'plac Europejski 1',
+			city: 'Warsaw',
+			postalCode: '00-844',
+			country: 'Poland',
+		},
+	},
+];
+// plac Europejski 1, 00-844 Warszawa
 const About = () => {
 	return (
 		<>
@@ -61,7 +83,7 @@ const About = () => {
 			</Section>
 			<StyledContactUsBackground>
 				<Section title='Contact us'>
-					<p>Contact us</p>
+					<ContactUs contactInfo={contactInfo} />
 				</Section>
 			</StyledContactUsBackground>
 		</>
