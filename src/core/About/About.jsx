@@ -65,6 +65,10 @@ const About = () => {
 			<StyledAboutPageBackground>
 				<Section title='Our story'>
 					<StyledOurStory>
+						<img
+							src={ourstoryImgSmall}
+							alt='2 women walking together in our warehouse'
+						/>
 						<p>
 							We started as a small shop in Chicago in 2012. Lorem ipsum dolor
 							sit amet consectetur, adipisicing elit. Modi perspiciatis beatae
@@ -72,10 +76,6 @@ const About = () => {
 							eaque nulla nam. Vero veritatis tenetur adipisci molestiae sint.
 							Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						</p>
-						<img
-							src={ourstoryImgSmall}
-							alt='2 women walking together in our warehouse'
-						/>
 					</StyledOurStory>
 				</Section>
 				<Section title='Frequently asked questions'>
@@ -92,19 +92,27 @@ const About = () => {
 const StyledOurStory = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2rem;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
+	gap: 4rem 2rem;
+	p,
+	img {
+		width: min(100%, 40rem);
+	}
 	p {
-		width: 100%;
-		max-width: 50rem;
-		font-size: 1.8rem;
-		padding: 2rem;
+		font-weight: 500;
+		text-align: center;
 	}
 	img {
 		border-radius: var(--border-radius-lg);
 		border: 1px solid var(--color-primary-600);
 		box-shadow: var(--shadow-md);
+		opacity: 0.9;
+	}
+	@media (min-width: 576px) {
+		p {
+			font-size: 1.8rem;
+		}
 	}
 `;
 
