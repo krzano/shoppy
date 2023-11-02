@@ -35,11 +35,11 @@ const Accordion = ({ accordionList }) => {
 };
 
 const StyledAccordion = styled.div`
-	background-color: var(--color-primary-50);
-	border: 1px solid var(--color-primary-200);
-	border-bottom: 2px solid var(--color-primary-200);
+	background-color: var(--color-neutral-0);
+	color: var(--color-primary-900);
+	border: 1px solid var(--color-primary-800);
 	border-radius: var(--border-radius-lg);
-	box-shadow: var(--shadow-lg);
+	box-shadow: var(--shadow-md);
 `;
 
 const StyledAccordionItem = styled.div`
