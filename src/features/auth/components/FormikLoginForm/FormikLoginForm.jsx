@@ -14,12 +14,11 @@ const FormikLoginForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const loginUser = async ({ email, password }) => {
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const { _data, error } = await supabase.auth.signInWithPassword({
 			email,
 			password,
 		});
 		if (!error) {
-			console.log('Data:', data);
 			toast.success('Successfully logged in');
 		} else {
 			toast.error(error.message);
@@ -28,12 +27,11 @@ const FormikLoginForm = () => {
 	};
 
 	const registerUser = async ({ email, password }) => {
-		const { data, error } = await supabase.auth.signUp({
+		const { _data, error } = await supabase.auth.signUp({
 			email,
 			password,
 		});
 		if (!error) {
-			console.log('Data:', data);
 			toast.success('Account created');
 		} else {
 			toast.error(error.message);
