@@ -39,6 +39,7 @@ const contactInfo = [
 		phoneNumber: '+1 630 231-0843',
 		email: 'contact@shoppy.com',
 		address: {
+			name: 'SHOPPY Inc.',
 			street: '337 Parkside Ave',
 			city: 'Chicago',
 			postalCode: 'IL 60185',
@@ -51,6 +52,7 @@ const contactInfo = [
 		phoneNumber: '+48 22 11-41-337',
 		email: 'contact@shoppy.pl',
 		address: {
+			name: 'SHOPPY S.A.',
 			street: 'plac Europejski 1',
 			city: 'Warsaw',
 			postalCode: '00-844',
