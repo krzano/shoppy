@@ -155,7 +155,7 @@ const BaseLayoutWrapper = ({ children }) => {
 			icon: <IoLogInOutline />,
 			visible: session ? false : true,
 			component: 'link',
-			path: 'login',
+			path: '/login',
 		},
 		{
 			id: 1,

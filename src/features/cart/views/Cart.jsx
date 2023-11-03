@@ -4,6 +4,7 @@ import EmptyCart from '../components/EmptyCart/EmptyCart';
 import CartItems from '../components/CartItems/CartItems';
 import { styled } from 'styled-components';
 import CartSummary from '../components/CartSummary/CartSummary';
+
 const Cart = () => {
 	const { totalAmount } = useSelector((store) => store.cart);
 
@@ -14,6 +15,7 @@ const Cart = () => {
 			</StyledCart>
 		);
 	}
+
 	return (
 		<StyledCart>
 			<StyledContentWrapper>

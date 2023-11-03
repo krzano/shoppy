@@ -1,6 +1,42 @@
 import { css, styled } from 'styled-components';
+import { Link, useLocation } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
+const Dropdown = ({ showDropdown, dropdownItemsList }) => {
+	const location = useLocation();
+
+	return (
+		<StyledDropdown
+			className={`account-dropdown ${showDropdown && 'show-dropdown'}`}>
+			<ul>
+				{dropdownItemsList.map((item) => {
+					if (!item.visible) return;
+					if (item.component === 'link') {
+						const { id, label, path, icon } = item;
+						return (
+							<li key={id}>
+								<StyledDropdownLink
+									to={path}
+									state={path === '/login' && { from: location.pathname }}>
+									{icon}
+									<span>{label}</span>
+								</StyledDropdownLink>
+							</li>
+						);
+					}
+					const { id, label, onClick, icon } = item;
+					return (
+						<li key={id}>
+							<StyledDropdownButton onClick={onClick}>
+								{icon}
+								<span>{label}</span>
+							</StyledDropdownButton>
+						</li>
+					);
+				})}
+			</ul>
+		</StyledDropdown>
+	);
+};
 
 const StyledDropdown = styled.div`
 	/* properties for toggle animation */
@@ -58,42 +94,11 @@ const StyledDropdownLink = styled(Link)`
 	${dropdownListItemStyles}
 	text-decoration: none;
 `;
+
 const StyledDropdownButton = styled.button`
 	${dropdownListItemStyles}
 	border: transparent;
 	cursor: pointer;
 `;
 
-const Dropdown = ({ showDropdown, dropdownItemsList }) => {
-	return (
-		<StyledDropdown
-			className={`account-dropdown ${showDropdown && 'show-dropdown'}`}>
-			<ul>
-				{dropdownItemsList.map((item) => {
-					if (!item.visible) return;
-					if (item.component === 'link') {
-						const { id, label, path, icon } = item;
-						return (
-							<li key={id}>
-								<StyledDropdownLink to={path}>
-									{icon}
-									<span>{label}</span>
-								</StyledDropdownLink>
-							</li>
-						);
-					}
-					const { id, label, onClick, icon } = item;
-					return (
-						<li key={id}>
-							<StyledDropdownButton onClick={onClick}>
-								{icon}
-								<span>{label}</span>
-							</StyledDropdownButton>
-						</li>
-					);
-				})}
-			</ul>
-		</StyledDropdown>
-	);
-};
 export default Dropdown;

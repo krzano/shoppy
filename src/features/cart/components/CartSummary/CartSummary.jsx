@@ -30,7 +30,8 @@ const CartSummary = () => {
 			<Button
 				className='summary-btn'
 				as={Link}
-				to={session ? '/checkout' : '/login'}>
+				to={session ? '/checkout' : '/login'}
+				state={!session && { from: '/cart' }}>
 				{session ? 'Proceed to Checkout' : 'Login to Continue'}
 			</Button>
 		</StyledCartSummary>
