@@ -2,9 +2,9 @@ import { css, styled } from 'styled-components';
 import StyledContentWrapper from '../../styles/StyledContentWrapper/StyledContentWrapper';
 StyledContentWrapper;
 
-const Section = ({ title, children, $textColorVariant = 'dark' }) => {
+const Section = ({ id, title, children, $textColorVariant = 'dark' }) => {
 	return (
-		<StyledSection $textColorVariant={$textColorVariant}>
+		<StyledSection id={id} $textColorVariant={$textColorVariant}>
 			<StyledContentWrapper>
 				{title && <StyledTitle>{title}</StyledTitle>}
 				{children}
