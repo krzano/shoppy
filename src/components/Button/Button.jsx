@@ -109,7 +109,7 @@ const StyledButton = styled.button`
 `;
 
 // TO ASK TO CHECK: if I should create a new component file for the ButtonLoadingSpinner
-export const ButtonLoadingSpinner = () => {
+const ButtonLoadingSpinner = () => {
 	return (
 		<StyledButtonLoadingSpinner>
 			<div className='spinner'></div>
