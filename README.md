@@ -35,7 +35,7 @@ Project is built with:
 
 [![desktop list of products](https://i.postimg.cc/V6FXPG5R/products.png)](https://krzano-shoppy.netlify.app/products)
 
-## Product page
+### Product page
 
 [![desktop product page](https://i.postimg.cc/sf7gxQJk/product-page.jpg)](https://krzano-shoppy.netlify.app/products/a463991e-4c13-40d5-9f05-9ed19a18257e)
 
