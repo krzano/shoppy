@@ -1,23 +1,68 @@
-# Shoppy - a digital store for buying and browsing tech products.
+[![Shoppy logo](https://i.postimg.cc/9QwCx2tj/shoppy-color-logo-png-small.png)](https://krzano-shoppy.netlify.app/)
 
-Shoppy is an e-commerce web application developped in React.
+<hr/>
 
-**Deploy status:** &nbsp;&nbsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/e9e77f6a-acbc-4997-98db-b019a6880d69/deploy-status)](https://app.netlify.com/sites/krzano-shoppy/deploys)\
-**Live preview: &nbsp; [https://krzano-shoppy.netlify.app/](https://krzano-shoppy.netlify.app/)**
-<br/>
+# Shoppy - an online shop with consumer electronics
 
-## Installation and Setup Instructions
+**Live demo: &nbsp; [https://krzano-shoppy.netlify.app/](https://krzano-shoppy.netlify.app/)**
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.
+## Technologies
 
-Installation:
+Project is built with:
 
-`npm install`
+- **React 18**
+- **React Router 6**
+- **Redux Toolkit**
+- **styled components**
+- **Supabase**
+- - user authentication
+- - products database
+- **Formik**
+- - forms
+- **Yup**
+- - forms validation
+- React-Toastify
+- - toast notifications
+- **Swiper**
 
-To Start Dev Server:
+## Screenshots
 
-`npm run dev`
+### Landing page
 
-To Visit App:
+[![desktop landing page](https://i.postimg.cc/Hs8jQvHh/full-landing-page-smaller.jpg)](https://krzano-shoppy.netlify.app/)
 
-`http://localhost:5173/`
+### List of products
+
+[![desktop list of products](https://i.postimg.cc/V6FXPG5R/products.png)](https://krzano-shoppy.netlify.app/products)
+
+## Product page
+
+[![desktop product page](https://i.postimg.cc/sf7gxQJk/product-page.jpg)](https://krzano-shoppy.netlify.app/products/a463991e-4c13-40d5-9f05-9ed19a18257e)
+
+### Cart
+
+[![desktop cart](https://i.postimg.cc/MTX96ffN/cartgif.gif)](https://krzano-shoppy.netlify.app/cart)
+
+### RWD
+
+The app layout is fully responsive, you can see some examples of the mobile view below:
+
+[![mobile landing page and cart](https://i.postimg.cc/rFz8rMvk/mobile-landing-cart.gif)]&nbsp;[![mobile list of products and product page](https://i.postimg.cc/4NMXvjgh/mobile-products.gif)]
+
+## Setup
+
+Download or clone this repository.
+
+Install dependencies:
+
+```
+npm install
+```
+
+Start a local web server by running:
+
+```
+npm run dev
+```
+
+Open http://localhost:5173 to view it in the browser.
