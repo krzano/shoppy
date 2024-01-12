@@ -41,13 +41,13 @@ Project is built with:
 
 ### Cart
 
-[![desktop cart](https://i.postimg.cc/MTX96ffN/cartgif.gif)](https://krzano-shoppy.netlify.app/cart)
+[![desktop cart gif](https://i.postimg.cc/MTX96ffN/cartgif.gif)](https://krzano-shoppy.netlify.app/cart)
 
 ### RWD
 
 The app layout is fully responsive, you can see some examples of the mobile view below:
 
-[![mobile landing page and cart](https://i.postimg.cc/rFz8rMvk/mobile-landing-cart.gif)]&nbsp;[![mobile list of products and product page](https://i.postimg.cc/4NMXvjgh/mobile-products.gif)]
+![mobile landing page and cart gif](https://i.postimg.cc/52wn4gZT/mobile-landing-cart-compressed.gif)&nbsp;![mobile list of products and product page gif](https://i.postimg.cc/d0PpnLYP/mobile-products-compressed.gif)
 
 ## Setup
 
